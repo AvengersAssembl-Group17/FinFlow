@@ -20,14 +20,17 @@
          <font>
             <Font name="Lato Regular" size="14.0" />
          </font></TextField>
-      <TextField fx:id="txtuserName" layoutX="422.0" layoutY="250.0" prefHeight="27.0" prefWidth="335.0" promptText="username">
-         <font>
-            <Font name="Lato Regular" size="14.0" />
-         </font></TextField>
       <TextField fx:id="txtlastName" layoutX="582.0" layoutY="185.0" promptText="Last Name">
          <font>
             <Font name="Lato Regular" size="14.0" />
-         </font></TextField>
+         </font>
+      </TextField>
+      <TextField fx:id="txtuserName" layoutX="422.0" layoutY="250.0" prefHeight="27.0" prefWidth="335.0" promptText="username">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+      </TextField>
+      
       <TextField fx:id="txtPhone" layoutX="422.0" layoutY="317.0" prefHeight="27.0" prefWidth="335.0" promptText="phone">
          <font>
             <Font name="Lato Regular" size="14.0" />

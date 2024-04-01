@@ -18,7 +18,15 @@ import finflow.dao.UserDAOImpl;
  * */
 public class LoginController implements Initializable{
 
-  
+    @FXML
+    private TextField txtUsername;
+    @FXML
+    private PasswordField txtPassword;
+    @FXML
+    private Button btnLogin;
+    @FXML
+    private Button btnSignUp;
+
     // Global variable used to track which user is logged in
     private int sessionUserID;
 
@@ -37,16 +45,6 @@ public class LoginController implements Initializable{
     public static LoginController getInstance() {
         return sessionInstance;
     }
-
-    @FXML
-    private TextField txtUsername;
-    @FXML
-    private PasswordField txtPassword;
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private Button btnSignUp;
-
     /**
      * @return Logged in user id
      * */
@@ -101,15 +99,10 @@ public class LoginController implements Initializable{
     		new Alert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
     	} else {
 	        try {
-	            int count = 0;
-	            ResultSet resultSet = userDAO.loginUser(txtUsername.getText(), txtPassword.getText());
-	
-	            while(resultSet.next()) {
-	                count += 1;
-	                sessionUserID = resultSet.getInt("id");
-	            }
-	
-	            if(count == 1) {
+	            if(userDAO.authenticateUser(txtUsername.getText(), txtPassword.getText())) {
+		            ResultSet resultSet = userDAO.loginUser(txtUsername.getText(), txtPassword.getText());
+		            sessionUserID = resultSet.getInt("id");
+	         
 	                btnLogin.getScene().getWindow().hide();
 	                Stage dashboardPage = new Stage();
 	                Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Dashboard.fxml"));
