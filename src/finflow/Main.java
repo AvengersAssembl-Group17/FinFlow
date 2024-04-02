@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 public class Main extends Application {
 	@Override
@@ -13,6 +14,8 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("FinFlow");
+			Image image = new Image("finflow/images/logo2.png");
+			primaryStage.getIcons().add(image);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();	

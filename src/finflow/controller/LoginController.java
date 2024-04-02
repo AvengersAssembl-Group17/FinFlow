@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -80,6 +81,8 @@ public class LoginController implements Initializable{
         Stage signupPage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/SignUp.fxml"));
         Scene scene = new Scene(root);
+        Image image = new Image("finflow/images/logo2.png");
+        signupPage.getIcons().add(image);
         signupPage.setScene(scene);
         signupPage.show();
         signupPage.setResizable(false);
@@ -105,6 +108,8 @@ public class LoginController implements Initializable{
                     Stage dashboardPage = new Stage();
                     Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Dashboard.fxml"));
                     Scene scene = new Scene(root);
+                    Image image = new Image("finflow/images/logo2.png");
+                    dashboardPage.getIcons().add(image);
                     dashboardPage.setScene(scene);
                     dashboardPage.show();
                 } else {

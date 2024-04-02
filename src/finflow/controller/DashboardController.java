@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -71,6 +72,8 @@ public class DashboardController implements Initializable{
         Stage backToLogin = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
         Scene scene = new Scene(root);
+        Image image = new Image("finflow/images/logo2.png");
+        backToLogin.getIcons().add(image);
         backToLogin.setScene(scene);
         backToLogin.show();
     }

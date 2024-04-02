@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -106,7 +107,9 @@ public class SignUpController implements Initializable{
                 btnCreateAccount.getScene().getWindow().hide();
                 Stage dashboard = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
+                Image image = new Image("finflow/images/logo2.png");
                 Scene scene = new Scene(root);
+                dashboard.getIcons().add(image);
                 dashboard.setScene(scene);
                 dashboard.show();
             }
