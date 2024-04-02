@@ -27,7 +27,6 @@ public class LoginController implements Initializable{
     @FXML
     private Button btnSignUp;
 
-    // Global variable used to track which user is logged in
     private int sessionUserID;
 
     private static LoginController sessionInstance;
