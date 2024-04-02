@@ -36,7 +36,6 @@ public class LoginController implements Initializable{
 
     // Constructor to initialize userDAO
     public LoginController() {
-        this.userDAO = new UserDAOImpl(new DatabaseConnection());
         sessionInstance = this;
     }
     /**
@@ -67,7 +66,7 @@ public class LoginController implements Initializable{
      * */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	this.userDAO = new UserDAOImpl(null);
+        this.userDAO = new UserDAOImpl(new DatabaseConnection()); // Pass a valid DatabaseConnection instance
     }
      
     
@@ -94,30 +93,33 @@ public class LoginController implements Initializable{
      * Function will be invoked when user clicks on login button
      * */
     @FXML
-    public void loginAction(ActionEvent event) throws IOException{
-    	if(txtUsername.getText().isBlank() || txtPassword.getText().isBlank()){
-    		new Alert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
-    	} else {
-	        try {
-	            if(userDAO.authenticateUser(txtUsername.getText(), txtPassword.getText())) {
-		            ResultSet resultSet = userDAO.loginUser(txtUsername.getText(), txtPassword.getText());
-		            sessionUserID = resultSet.getInt("id");
-	         
-	                btnLogin.getScene().getWindow().hide();
-	                Stage dashboardPage = new Stage();
-	                Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Dashboard.fxml"));
-	                Scene scene = new Scene(root);
-	                dashboardPage.setScene(scene);
-	                dashboardPage.show();
-	            } else {
-	                System.out.println("Error");
-	                new Alert(Alert.AlertType.ERROR, "Invalid Username or Password").showAndWait();
-	                txtUsername.clear();
-	                txtPassword.clear();
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } 
-    	}
+    public void loginAction(ActionEvent event) throws IOException {
+        if (txtUsername.getText().isBlank() || txtPassword.getText().isBlank()) {
+            new Alert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
+        } else {
+            try {
+                ResultSet resultSet = userDAO.loginUser(txtUsername.getText(), txtPassword.getText());
+                
+                if (resultSet.next()) {
+                    sessionUserID = resultSet.getInt("id");
+                    btnLogin.getScene().getWindow().hide();
+                    Stage dashboardPage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Dashboard.fxml"));
+                    Scene scene = new Scene(root);
+                    dashboardPage.setScene(scene);
+                    dashboardPage.show();
+                } else {
+                    System.out.println("Error");
+                    new Alert(Alert.AlertType.ERROR, "Invalid Username or Password").showAndWait();
+                    txtUsername.clear();
+                    txtPassword.clear();
+                }
+                // Close the ResultSet after retrieving data
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
 }

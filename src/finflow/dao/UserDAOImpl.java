@@ -71,18 +71,21 @@ public class UserDAOImpl implements UserDAO {
     
     @Override
     public ResultSet loginUser(String username, String password) {
- 	   String query = "SELECT * FROM user WHERE username=? AND pass=?";
-  	   ResultSet resultSet = null;
-  	   
-  	   try (Connection connection = dbConnection.getConnection()) {
-       try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-             preparedStatement.setString(1, username);
-             preparedStatement.setString(2, password);
-			 resultSet = preparedStatement.executeQuery();
-       }
-  	   }catch (SQLException e) {
-			e.printStackTrace();
-  	   }
-  	   return resultSet;
-   }
+        String query = "SELECT * FROM user WHERE username=? AND password=?";
+        ResultSet resultSet = null;
+        try {
+        	Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            resultSet = preparedStatement.executeQuery();            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return resultSet;
+    }
+
+
 }
