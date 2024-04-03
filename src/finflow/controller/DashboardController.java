@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class DashboardController implements Initializable{
 
     @FXML
-    private Text txtUsername;
+    private Text txtWelcomeMessage;
 
     @FXML
     private Button btnProfile;
@@ -36,6 +36,19 @@ public class DashboardController implements Initializable{
     
     @FXML
     private Button btnLogout;
+    
+    @FXML
+    private Text txtTotalIncome;
+    
+    @FXML
+    private Text txtTotalExpense;
+        
+    @FXML
+    private Button btnAddIncome;
+    
+    @FXML
+    private Button btnAddExpense;
+    
 
     private static DashboardController instance;
 
@@ -50,15 +63,19 @@ public class DashboardController implements Initializable{
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-        setUsername(LoginController.getInstance().username());
+    	String username = LoginController.getInstance().username();
+    	StringBuilder sb = new StringBuilder("Hello ");
+    	sb.append(username);
+    	sb.append(", welcome back!");
+        setWelcomeMessage(sb.toString());
 	}   
    
     /**
      * @param user
-     * Method sets username
+     * Method sets welcomeMessage
      * */
-    public void setUsername(String user) {
-        this.txtUsername.setText(user);      
+    public void setWelcomeMessage(String message) {
+        this.txtWelcomeMessage.setText(message);      
     }
      
     /**
@@ -76,6 +93,24 @@ public class DashboardController implements Initializable{
         backToLogin.getIcons().add(image);
         backToLogin.setScene(scene);
         backToLogin.show();
+    }
+    
+    @FXML
+    void addIncome(ActionEvent event) throws IOException {   
+        Stage newIternary = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/AddTransaction.fxml"));
+        Scene scene = new Scene(root);
+        newIternary.setScene(scene);
+        newIternary.show();
+    }
+    
+    @FXML
+    void addExpense(ActionEvent event) throws IOException {   
+        Stage newIternary = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/AddTransaction.fxml"));
+        Scene scene = new Scene(root);
+        newIternary.setScene(scene);
+        newIternary.show();
     }
 }
 
