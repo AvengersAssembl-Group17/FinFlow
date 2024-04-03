@@ -98,7 +98,7 @@
                      <buttons>
                         <ImageView fitHeight="30.0" fitWidth="30.0">
                            <image>
-                              <Image url="@../../../../../Downloads/logout-icon.png" />
+                              <Image url="@../images/logout-icon.png" />
                            </image>
                         </ImageView>
                         <Button fx:id="btnLogout" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logoutAction" prefHeight="45.0" prefWidth="217.0" style="-fx-background-color: #40396E; -fx-border-width: 0.5px;" text="Logout" textFill="WHITE">
