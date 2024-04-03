@@ -105,13 +105,13 @@ public class LoginController implements Initializable{
                 if (resultSet.next()) {
                     sessionUserID = resultSet.getInt("id");
                     btnLogin.getScene().getWindow().hide();
-                    Stage dashboardPage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Dashboard.fxml"));
+                    Stage main = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Menu.fxml"));
                     Scene scene = new Scene(root);
                     Image image = new Image("finflow/images/logo2.png");
-                    dashboardPage.getIcons().add(image);
-                    dashboardPage.setScene(scene);
-                    dashboardPage.show();
+                    main.getIcons().add(image);
+                    main.setScene(scene);
+                    main.show();
                 } else {
                     System.out.println("Error");
                     new Alert(Alert.AlertType.ERROR, "Invalid Username or Password").showAndWait();

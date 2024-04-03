@@ -10,33 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class DashboardController implements Initializable{
+public class HomeController implements Initializable{
 
     @FXML
     private Text txtWelcomeMessage;
 
-    @FXML
-    private Button btnProfile;
-    
-    @FXML
-    private Button btnHome;
-    
-    @FXML
-    private Button btnTransactionHistory;
-    
-    @FXML
-    private Button btnReports;
-    
-    @FXML
-    private Button btnEducation;
-    
-    @FXML
-    private Button btnLogout;
-    
     @FXML
     private Text txtTotalIncome;
     
@@ -49,15 +30,14 @@ public class DashboardController implements Initializable{
     @FXML
     private Button btnAddExpense;
     
-
-    private static DashboardController instance;
-
-    public DashboardController() {
+    private static HomeController instance;
+    
+    public HomeController() {
         instance = this; 
         
     }
 
-    public static DashboardController getInstance() {
+    public static HomeController getInstance() {
         return instance;
     }
     
@@ -77,24 +57,7 @@ public class DashboardController implements Initializable{
     public void setWelcomeMessage(String message) {
         this.txtWelcomeMessage.setText(message);      
     }
-     
-    /**
-     * @param action event
-     * @throws IOException
-     * Logout logic
-     * */
-    @FXML
-    void logoutAction(ActionEvent event) throws IOException {
-        btnLogout.getScene().getWindow().hide();
-        Stage backToLogin = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
-        Scene scene = new Scene(root);
-        Image image = new Image("finflow/images/logo2.png");
-        backToLogin.getIcons().add(image);
-        backToLogin.setScene(scene);
-        backToLogin.show();
-    }
-    
+       
     @FXML
     void addIncome(ActionEvent event) throws IOException {   
         Stage newIternary = new Stage();
@@ -113,4 +76,3 @@ public class DashboardController implements Initializable{
         newIternary.show();
     }
 }
-
