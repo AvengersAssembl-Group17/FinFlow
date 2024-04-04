@@ -5,9 +5,22 @@ import java.util.Date;
 public class Transaction {
 	private int transactionId;
     private int userId;
+    private String title;
     private double amount;
     private String type;
     private Date date;
+    private String notes;
+    
+	public Transaction(int transactionId, int userId, String title, double amount, String type, Date date,
+			String notes) {
+		this.transactionId = transactionId;
+		this.userId = userId;
+		this.title = title;
+		this.amount = amount;
+		this.type = type;
+		this.date = date;
+		this.notes = notes;
+	}
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -19,6 +32,12 @@ public class Transaction {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public double getAmount() {
 		return amount;
@@ -38,11 +57,11 @@ public class Transaction {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Transaction(int transactionId, int userId, double amount, String type, Date date) {
-		this.transactionId = transactionId;
-		this.userId = userId;
-		this.amount = amount;
-		this.type = type;
-		this.date = date;
+	public String getNotes() {
+		return notes;
 	}
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+	
 }

@@ -3,8 +3,7 @@ package finflow.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import finflow.Main;
+import finflow.utils.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,9 +41,12 @@ public class MenuController implements Initializable{
     private BorderPane mainPane;
     
     private static MenuController instance;
+    
+    private FxmlLoader fxmlLoader;
 
     public MenuController() {
-        instance = this;      
+        instance = this;  
+        this.fxmlLoader = new FxmlLoader();
     }
 
     public static MenuController getInstance() {
@@ -53,53 +55,38 @@ public class MenuController implements Initializable{
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-        Pane view = getPage("Home");
+        Pane view = fxmlLoader.getPage("Home");
         mainPane.setCenter(view);
 	}   
        
     @FXML
     void homeAction(ActionEvent event) throws IOException {
-    	Pane view = getPage("Home");
+    	Pane view = fxmlLoader.getPage("Home");
         mainPane.setCenter(view);
     }
     
     @FXML
     void profileAction(ActionEvent event) throws IOException {
-       Pane view = getPage("Profile");
+       Pane view = fxmlLoader.getPage("Profile");
        mainPane.setCenter(view);
     }
     
     @FXML
     void transactionHistoryAction(ActionEvent event) throws IOException {
-    	Pane view = getPage("TransactionHistory");
+    	Pane view = fxmlLoader.getPage("TransactionHistory");
         mainPane.setCenter(view);
     }
     
     @FXML
     void reportAction(ActionEvent event) throws IOException {
-    	Pane view = getPage("Reports");
+    	Pane view = fxmlLoader.getPage("Reports");
         mainPane.setCenter(view);
     }
     
     @FXML
     void educationAction(ActionEvent event) throws IOException {
-    	Pane view = getPage("EducationalResource");
+    	Pane view = fxmlLoader.getPage("EducationalResource");
         mainPane.setCenter(view);
-    }
-    
-    @SuppressWarnings("static-access")
-	public Pane getPage(String filename) {
-    	Pane view = null;
-    	try {
-    		URL fileUrl = Main.class.getResource("view/"+filename+".fxml");
-    		if(fileUrl==null) {
-    			throw new java.io.FileNotFoundException("FXMl file can't be found");
-    		}
-    		view = new FXMLLoader().load(fileUrl);
-    	}catch(Exception e){
-    		System.out.println("No page "+filename+ "please check fxmlLoader");
-    	}
-    	return view;
     }
    
     @FXML

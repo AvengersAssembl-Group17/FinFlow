@@ -3,15 +3,18 @@ package finflow.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import finflow.utils.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class HomeController implements Initializable{
 
@@ -30,10 +33,19 @@ public class HomeController implements Initializable{
     @FXML
     private Button btnAddExpense;
     
+    @FXML
+    private AnchorPane homeScreen;
+    
+    @FXML
+    private BorderPane homePane;
+    
     private static HomeController instance;
+    
+    private FxmlLoader fxmlLoader;
     
     public HomeController() {
         instance = this; 
+        this.fxmlLoader = new FxmlLoader();
         
     }
 
@@ -59,20 +71,14 @@ public class HomeController implements Initializable{
     }
        
     @FXML
-    void addIncome(ActionEvent event) throws IOException {   
-        Stage newIternary = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/AddTransaction.fxml"));
-        Scene scene = new Scene(root);
-        newIternary.setScene(scene);
-        newIternary.show();
+    void addIncome(ActionEvent event) throws IOException {
+        Pane view = fxmlLoader.getPage("AddTransaction");
+        homePane.setCenter(view);
     }
     
     @FXML
     void addExpense(ActionEvent event) throws IOException {   
-        Stage newIternary = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/AddTransaction.fxml"));
-        Scene scene = new Scene(root);
-        newIternary.setScene(scene);
-        newIternary.show();
+    	Pane view = fxmlLoader.getPage("AddTransaction");
+        homePane.setCenter(view);
     }
 }
