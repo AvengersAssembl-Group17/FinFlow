@@ -98,6 +98,7 @@ public class MenuController implements Initializable{
         Image image = new Image("finflow/images/logo2.png");
         backToLogin.getIcons().add(image);
         backToLogin.setScene(scene);
+        backToLogin.setResizable(false);
         backToLogin.show();
     }
 }

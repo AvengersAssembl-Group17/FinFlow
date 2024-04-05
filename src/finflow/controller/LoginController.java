@@ -111,6 +111,7 @@ public class LoginController implements Initializable{
                     Image image = new Image("finflow/images/logo2.png");
                     main.getIcons().add(image);
                     main.setScene(scene);
+                    main.setResizable(false);
                     main.show();
                 } else {
                     System.out.println("Error");

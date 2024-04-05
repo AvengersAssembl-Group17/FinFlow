@@ -3,17 +3,20 @@ package finflow.model;
 import java.util.Date;
 
 public class Transaction {
-	private int transactionId;
+	private int id;
     private int userId;
     private String title;
     private double amount;
-    private String type;
+    private int type;
     private Date date;
     private String notes;
     
-	public Transaction(int transactionId, int userId, String title, double amount, String type, Date date,
+    public Transaction() { 	
+    }
+    
+	public Transaction(int id, int userId, String title, double amount, int type, Date date,
 			String notes) {
-		this.transactionId = transactionId;
+		this.id = id;
 		this.userId = userId;
 		this.title = title;
 		this.amount = amount;
@@ -22,10 +25,10 @@ public class Transaction {
 		this.notes = notes;
 	}
 	public int getTransactionId() {
-		return transactionId;
+		return id;
 	}
 	public void setTransactionId(int transactionId) {
-		this.transactionId = transactionId;
+		this.id = transactionId;
 	}
 	public int getUserId() {
 		return userId;
@@ -45,10 +48,10 @@ public class Transaction {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public String getType() {
+	public int getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public Date getDate() {

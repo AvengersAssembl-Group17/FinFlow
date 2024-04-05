@@ -33,6 +33,8 @@ public class HomeController implements Initializable{
     @FXML
     private Button btnAddExpense;
     
+    private String action;
+    
     @FXML
     private AnchorPane homeScreen;
     
@@ -46,11 +48,18 @@ public class HomeController implements Initializable{
     public HomeController() {
         instance = this; 
         this.fxmlLoader = new FxmlLoader();
-        
     }
 
     public static HomeController getInstance() {
         return instance;
+    }
+    
+    public BorderPane getMainPane() {
+        return homePane;
+    }
+    
+    public String actionPerformed() {
+        return action;
     }
     
     @Override
@@ -72,12 +81,14 @@ public class HomeController implements Initializable{
        
     @FXML
     void addIncome(ActionEvent event) throws IOException {
+    	this.action = "Income";
         Pane view = fxmlLoader.getPage("AddTransaction");
         homePane.setCenter(view);
     }
     
     @FXML
     void addExpense(ActionEvent event) throws IOException {   
+    	this.action = "Expense";
     	Pane view = fxmlLoader.getPage("AddTransaction");
         homePane.setCenter(view);
     }

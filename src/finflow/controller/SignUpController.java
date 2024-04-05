@@ -111,6 +111,7 @@ public class SignUpController implements Initializable{
                 Scene scene = new Scene(root);
                 dashboard.getIcons().add(image);
                 dashboard.setScene(scene);
+                dashboard.setResizable(false);
                 dashboard.show();
             }
         }

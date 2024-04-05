@@ -8,39 +8,60 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="finflow.controller.UserController">
+<AnchorPane fx:id="addTransaction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="finflow.controller.TransactionController">
    <children>
-      <TextField fx:id="textAmount" layoutX="161.0" layoutY="118.0" prefHeight="26.0" prefWidth="161.0">
+      <TextField fx:id="transactionAmount" layoutX="169.0" layoutY="168.0" prefHeight="26.0" prefWidth="161.0" promptText="Enter Amount">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <Label layoutX="27.0" layoutY="119.0" text="Enter Amount">
+      <Label layoutX="35.0" layoutY="169.0" text="Enter Amount">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="28.0" layoutY="160.0" text="Date">
+      <Label layoutX="36.0" layoutY="250.0" text="Date">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <DatePicker fx:id="date" layoutX="161.0" layoutY="162.0" prefHeight="26.0" prefWidth="161.0" />
-      <Label layoutX="28.0" layoutY="200.0" text="Select Type">
+      <DatePicker fx:id="transactionDate" layoutX="169.0" layoutY="252.0" prefHeight="26.0" prefWidth="161.0" promptText="MM/DD/YYYY" />
+      <Label layoutX="36.0" layoutY="210.0" text="Select Type">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="addTransactionBtn" layoutX="88.0" layoutY="268.0" mnemonicParsing="false" style="-fx-background-color: #708090;" text="Add Transaction" textFill="WHITE">
+      <Button fx:id="addTransactionBtn" layoutX="102.0" layoutY="340.0" mnemonicParsing="false" onAction="#addTransactionAction" style="-fx-background-color: #708090;" text="Add Transaction" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="type" layoutX="161.0" layoutY="202.0" prefHeight="26.0" prefWidth="161.0" />
-      <Label layoutX="100.0" layoutY="57.0" text="Add Transaction">
+      <ComboBox fx:id="transactionType" layoutX="169.0" layoutY="212.0" prefHeight="26.0" prefWidth="161.0" promptText="Select Type" />
+      <Label fx:id="screenTitle" layoutX="129.0" layoutY="65.0" text="Add Transaction">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
+      <TextField fx:id="transactionTitle" layoutX="169.0" layoutY="128.0" prefHeight="26.0" prefWidth="161.0" promptText="Enter Title">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Label layoutX="35.0" layoutY="129.0" text="Title">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="transactionReference" layoutX="169.0" layoutY="288.0" prefHeight="26.0" prefWidth="161.0" promptText="Enter reference Notes">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Label layoutX="35.0" layoutY="289.0" text="Reference">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonBack" layoutX="23.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickBack" text=" &lt; Back" />
    </children>
 </AnchorPane>
