@@ -10,4 +10,6 @@ public interface TransactionDAO {
 	ResultSet getTransactionNamefromId(String id);
 	int saveTransaction(Transaction transaction);
 	List<String> getTransactionTypesByCategory(String category);
+	Double getTotalIncomeUser(int userId);
+	Double getTotalExpenseUser(int userId);
 }

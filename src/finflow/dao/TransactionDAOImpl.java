@@ -89,4 +89,41 @@ public class TransactionDAOImpl implements TransactionDAO{
         }
         return transactionTypes;
     }
+	
+	public Double getTotalIncomeUser(int userId) {
+		String query = "SELECT SUM(amount) AS total_income FROM transaction " +
+                "WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = 'Income')";		
+		double totalIncome = 0.0;
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	    	preparedStatement.setInt(1, userId);
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	                totalIncome = resultSet.getDouble("total_income");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); 
+	    }
+	    return totalIncome;
+	}
+	
+	public Double getTotalExpenseUser(int userId) {
+		String query = "SELECT SUM(amount) AS total_expense FROM transaction " +
+                "WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = 'Expense')";
+		double totalExpense = 0.0;
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	    	preparedStatement.setInt(1, userId);
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	            	totalExpense = resultSet.getDouble("total_expense");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); 
+	    }
+	    return totalExpense;
+	}
+
 }

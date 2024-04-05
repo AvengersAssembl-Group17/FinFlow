@@ -16,9 +16,9 @@
                <children>
                   <Group layoutX="36.0" layoutY="68.0">
                      <children>
-                        <Text fx:id="txtWelcomeMessage" layoutX="63.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="txtWelcomeMessage" wrappingWidth="403.6551284790039">
+                        <Text fx:id="txtWelcomeMessage" fill="#9ea39f" layoutX="63.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="txtWelcomeMessage" wrappingWidth="403.6551284790039">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Consolas" size="16.0" />
                            </font>
                         </Text>
                         <Text fill="#40396e" layoutY="1.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Home " wrappingWidth="52.0">
@@ -35,45 +35,45 @@
                   </Group>
                   <Group layoutX="190.0" layoutY="101.0">
                      <children>
-                        <Rectangle arcHeight="5.0" fill="#c27967" height="84.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="136.0" />
+                        <Rectangle arcHeight="5.0" fill="#9ea39f" height="84.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="136.0" />
                         <Text fill="#40396e" layoutX="14.0" layoutY="40.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Expense" wrappingWidth="113.33331298828125">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="txtTotalExpense" fill="#74727d" layoutX="14.0" layoutY="67.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
+                        <Text fx:id="txtTotalExpense" fill="#d22a17" layoutX="14.0" layoutY="67.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
                            <font>
-                              <Font name="System Bold" size="24.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
                      </children>
                   </Group>
                   <Group layoutX="349.0" layoutY="101.0">
                      <children>
-                        <Rectangle arcHeight="5.0" fill="#c27967" height="84.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="136.0" />
+                        <Rectangle arcHeight="5.0" fill="#9ea39f" height="84.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="136.0" />
                         <Text fill="#40396e" layoutX="15.0" layoutY="36.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Balance" wrappingWidth="113.33331298828125">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="txtTotalExpense1" fill="#65c270" layoutX="15.0" layoutY="66.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
+                        <Text fx:id="txtTotalBalance" fill="#7c807c" layoutX="15.0" layoutY="66.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
                            <font>
-                              <Font name="System Bold" size="24.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
                      </children>
                   </Group>
                   <Group layoutX="36.0" layoutY="101.0">
                      <children>
-                        <Rectangle arcHeight="5.0" fill="#65c270" height="84.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="136.0" />
+                        <Rectangle arcHeight="5.0" fill="#9ea39f" height="84.0" opacity="0.17" stroke="BLACK" strokeType="INSIDE" width="136.0" />
                         <Text fill="#40396e" layoutX="14.0" layoutY="40.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Income" wrappingWidth="113.33331298828125">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="txtTotalIncome" fill="#74727d" layoutX="14.0" layoutY="67.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="97.99996948242188">
+                        <Text fx:id="txtTotalIncome" fill="#96c362" layoutX="14.0" layoutY="67.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="97.99996948242188">
                            <font>
-                              <Font name="System Bold" size="24.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
                      </children>

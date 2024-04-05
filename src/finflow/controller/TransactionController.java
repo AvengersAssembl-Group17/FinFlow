@@ -6,18 +6,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.*;
-import javax.naming.directory.InvalidAttributesException;
 import java.sql.Date;
-import java.time.LocalDate;
 
 import finflow.dao.DatabaseConnection;
 import finflow.dao.TransactionDAOImpl;
 import finflow.dao.TransactionDAO;
 import finflow.model.Transaction;
-import finflow.model.TransactionType;
 import finflow.utils.FxmlLoader;
 
 public class TransactionController implements Initializable{
