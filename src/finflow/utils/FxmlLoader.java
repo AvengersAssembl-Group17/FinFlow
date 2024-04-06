@@ -3,7 +3,6 @@ package finflow.utils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-
 import finflow.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -17,7 +16,7 @@ public class FxmlLoader {
     		if(fileUrl==null) {
     			throw new java.io.FileNotFoundException("FXMl file can't be found");
     		}
-    		view = new FXMLLoader().load(fileUrl);
+    		view = FXMLLoader.load(fileUrl);
     	}catch(Exception e){
     		System.out.println("No page "+filename+ "please check fxmlLoader");
     	}

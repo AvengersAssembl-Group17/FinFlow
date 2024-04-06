@@ -51,8 +51,6 @@ public class TransactionController implements Initializable{
     
     private BorderPane homePane;
        
-    private int transactionTypeID;
-
     private static TransactionController instance;
     
     private TransactionDAO transactionDAO;
@@ -102,6 +100,7 @@ public class TransactionController implements Initializable{
     		new Alert(Alert.AlertType.ERROR, "Please enter transaction amount").showAndWait();
         	return;
     	}
+    	
     	try {
     		double amount = Double.parseDouble(transactionAmount.getText());
     	}catch(NumberFormatException e) {
