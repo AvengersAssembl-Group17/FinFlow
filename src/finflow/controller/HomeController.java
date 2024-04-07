@@ -2,18 +2,25 @@ package finflow.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import finflow.dao.DatabaseConnection;
 import finflow.dao.TransactionDAO;
 import finflow.dao.TransactionDAOImpl;
+import finflow.model.Transaction;
+import finflow.utils.Constants;
 import finflow.utils.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class HomeController implements Initializable{
@@ -43,6 +50,9 @@ public class HomeController implements Initializable{
     
     @FXML
     private BorderPane homePane;
+    
+    @FXML
+    private VBox transactionLayout;
     
     private static HomeController instance;
     
@@ -78,15 +88,17 @@ public class HomeController implements Initializable{
     	this.transDAO = new TransactionDAOImpl(new DatabaseConnection());
     	
     	String username = LoginController.getInstance().username();
-    	StringBuilder sb = new StringBuilder("Hello ");
+    	StringBuilder sb = new StringBuilder(Constants.WELCOME_PREFIX);
     	sb.append(username);
-    	sb.append(", welcome back!");
+    	sb.append(Constants.WELCOME_SUFFIX);
         setWelcomeMessage(sb.toString());
         
         this.activeUser= LoginController.getInstance().activeID();
         setTotalIncome();
         setTotalExpense();
         setTotalBalance();
+        
+        populateRecentTransaction();
 	}   
    
     /**
@@ -99,32 +111,55 @@ public class HomeController implements Initializable{
     
     public void setTotalIncome() {
     	this.totalIncome = this.transDAO.getTotalIncomeUser(activeUser);
-    	String formattedTotalIncome = String.format("$%.2f", this.totalIncome);
+    	String formattedTotalIncome = String.format(Constants.CURRENCY_FORMAT, this.totalIncome);
         txtTotalIncome.setText(formattedTotalIncome);
     }
     
     public void setTotalExpense() {
     	this.totalExpense = this.transDAO.getTotalExpenseUser(activeUser);
-    	String formattedTotalExpense = String.format("$%.2f", this.totalExpense);
+    	String formattedTotalExpense = String.format(Constants.CURRENCY_FORMAT, this.totalExpense);
         txtTotalExpense.setText(formattedTotalExpense);
     }
     
     public void setTotalBalance() {
     	this.totalBalance = this.totalIncome - this.totalExpense;
-    	String formattedTotalBalance = String.format("$%.2f", this.totalBalance);
+    	String formattedTotalBalance = String.format(Constants.CURRENCY_FORMAT, this.totalBalance);
     	this.txtTotalBalance.setText(formattedTotalBalance);
+    }
+    
+    public void populateRecentTransaction() {
+    	List<Transaction> recentTrans= new ArrayList<>(getRecenTransaction());
+    	    		
+    	for(int i=0; i<recentTrans.size();i++) {
+    		FXMLLoader fxmlLoader = new FXMLLoader();
+    		fxmlLoader.setLocation(getClass().getResource("/finflow/view/TransactionItem.fxml"));
+    		try {
+        		HBox hbox = fxmlLoader.load();
+        		TransactionItemController tic = fxmlLoader.getController();
+        		tic.setData(recentTrans.get(i));
+        		transactionLayout.getChildren().add(hbox);
+    		}catch(IOException e) {
+    			e.printStackTrace();
+    		}	
+    	}
+    }
+    
+    public List<Transaction> getRecenTransaction(){
+    	List<Transaction> recentTrans= new ArrayList<>();
+    	recentTrans = transDAO.getRecentTransactions(activeUser,Constants.RECENT_TRANSACTION_LIMIT);
+    	return recentTrans;
     }
     
     @FXML
     void addIncome(ActionEvent event) throws IOException {
-    	this.action = "Income";
+    	this.action = Constants.ACTION_INCOME;
         Pane view = fxmlLoader.getPage("AddTransaction");
         homePane.setCenter(view);
     }
     
     @FXML
     void addExpense(ActionEvent event) throws IOException {   
-    	this.action = "Expense";
+    	this.action = Constants.ACTION_EXPENSE;
     	Pane view = fxmlLoader.getPage("AddTransaction");
         homePane.setCenter(view);
     }

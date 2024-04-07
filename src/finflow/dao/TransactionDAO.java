@@ -12,4 +12,5 @@ public interface TransactionDAO {
 	List<String> getTransactionTypesByCategory(String category);
 	Double getTotalIncomeUser(int userId);
 	Double getTotalExpenseUser(int userId);
+	List<Transaction> getRecentTransactions(int userId, int limit);
 }

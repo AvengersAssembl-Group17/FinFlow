@@ -14,6 +14,7 @@ import finflow.dao.DatabaseConnection;
 import finflow.dao.TransactionDAOImpl;
 import finflow.dao.TransactionDAO;
 import finflow.model.Transaction;
+import finflow.utils.Constants;
 import finflow.utils.FxmlLoader;
 
 public class TransactionController implements Initializable{
@@ -72,10 +73,10 @@ public class TransactionController implements Initializable{
     	 
     	 transactionTypes = new ArrayList<>();
 
-    	 if(action.equalsIgnoreCase("Income")) {
+    	 if(action.equalsIgnoreCase(Constants.ACTION_INCOME)) {
     	        List<String> incomeTypes = transactionDAO.getTransactionTypesByCategory("Income");
     	        transactionTypes.addAll(incomeTypes);
-    	  } else if(action.equalsIgnoreCase("Expense")){
+    	  } else if(action.equalsIgnoreCase(Constants.ACTION_EXPENSE)){
     	        List<String> expenseTypes = transactionDAO.getTransactionTypesByCategory("Expense");
     	        transactionTypes.addAll(expenseTypes);
     	  }

@@ -125,5 +125,36 @@ public class TransactionDAOImpl implements TransactionDAO{
 	    }
 	    return totalExpense;
 	}
+	
+	public List<Transaction> getRecentTransactions(int userId, int limit) {
+        List<Transaction> recentTransactions = new ArrayList<>();
+        String query = "SELECT * FROM `transaction` t JOIN transactionType tt ON t.type = tt.id where t.userId=? ORDER BY t.date DESC";
+        if (limit > 0) {
+        	query += " LIMIT ?";
+        }
+        try (Connection connection = dbConnection.getConnection();
+   	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            if (limit > 0) {
+            	preparedStatement.setInt(2, limit);
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Transaction transaction = new Transaction();
+                transaction.setTransactionId(resultSet.getInt("id"));
+                transaction.setUserId(resultSet.getInt("userId"));
+                transaction.setAmount(resultSet.getDouble("amount"));
+                transaction.setTitle(resultSet.getString("title"));
+                transaction.setType(resultSet.getInt("type"));
+                transaction.setDate(resultSet.getDate("date"));
+                transaction.setNotes(resultSet.getString("notes"));
+                recentTransactions.add(transaction);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return recentTransactions;
+    }
 
 }
