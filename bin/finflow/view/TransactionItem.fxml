@@ -11,7 +11,7 @@
    <children>
       <ImageView fx:id="transactionImg" fitHeight="58.0" fitWidth="58.0">
          <image>
-            <Image url="@../../../../../Downloads/transaction.png" />
+            <Image url="@../images/transaction.png" />
          </image>
       </ImageView>
       <Pane prefHeight="58.0" prefWidth="9.0" />
