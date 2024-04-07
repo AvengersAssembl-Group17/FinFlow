@@ -156,5 +156,31 @@ public class TransactionDAOImpl implements TransactionDAO{
 
         return recentTransactions;
     }
+	
+	@Override
+	public List<Transaction> getTransactionsGroupedByCategory(int userId, String category) {
+	    List<Transaction> transactions = new ArrayList<>();
+	    String query = "SELECT * FROM transaction WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = ?)";
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setInt(1, userId);
+	        preparedStatement.setString(2, category);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        while (resultSet.next()) {
+	            Transaction transaction = new Transaction();
+	            transaction.setTransactionId(resultSet.getInt("id"));
+	            transaction.setUserId(resultSet.getInt("userId"));
+	            transaction.setAmount(resultSet.getDouble("amount"));
+	            transaction.setTitle(resultSet.getString("title"));
+	            transaction.setType(resultSet.getInt("type"));
+	            transaction.setDate(resultSet.getDate("date"));
+	            transaction.setNotes(resultSet.getString("notes"));
+	            transactions.add(transaction);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return transactions;
+	}
 
 }
