@@ -45,7 +45,7 @@
             <Font name="Lato Regular" size="14.0" />
          </font>
       </PasswordField>
-      <Button fx:id="btnCreateAccount" layoutX="198.0" layoutY="351.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #9AA2E6;" text="UPDATE" textFill="WHITE">
+      <Button fx:id="btnCreateAccount" layoutX="198.0" layoutY="351.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #9AA2E6;" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="Lato Bold" size="18.0" />
          </font>
