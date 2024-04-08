@@ -1,3 +1,4 @@
+
 package finflow.dao;
 
 import java.sql.Connection;
@@ -5,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import finflow.model.User;
+
 
 public class UserDAOImpl implements UserDAO {
 
@@ -87,5 +89,23 @@ public class UserDAOImpl implements UserDAO {
         return resultSet;
     }
 
+    @Override
+    public ResultSet UserDetails(int userid)
+    {
+  
+        String query = "SELECT * FROM user WHERE id=?";
+        ResultSet resultSet = null;
+        try {
+        	Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setInt(1, userid);
+            resultSet = preparedStatement.executeQuery();            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return resultSet;
+    }
 
 }
