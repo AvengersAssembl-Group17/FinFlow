@@ -182,5 +182,22 @@ public class TransactionDAOImpl implements TransactionDAO{
 	    }
 	    return transactions;
 	}
+	
+	@Override
+    public String getTransactionTypeNameById(int typeId) {
+        String query = "SELECT type FROM transactionType WHERE id = ?";
+        String typeName = null;
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, typeId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                typeName = resultSet.getString("type");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return typeName;
+    }
 
 }
