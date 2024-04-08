@@ -1,3 +1,4 @@
+
 package finflow.controller;
 
 import javafx.event.ActionEvent;
@@ -105,14 +106,11 @@ public class SignUpController implements Initializable{
 
                 // Hide the SignUp screen and go back to the Login page, allowing them to enter their credentials
                 btnCreateAccount.getScene().getWindow().hide();
-                Stage dashboard = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
-                Image image = new Image("finflow/images/logo2.png");
-                Scene scene = new Scene(root);
-                dashboard.getIcons().add(image);
-                dashboard.setScene(scene);
-                dashboard.setResizable(false);
-                dashboard.show();
+                Stage profileStage = new Stage();
+                Parent profileRoot = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
+                Scene profileScene = new Scene(profileRoot);
+                profileStage.setScene(profileScene);
+                profileStage.show();
             }
         }
     }
@@ -158,10 +156,4 @@ public class SignUpController implements Initializable{
     	return upperCase && lowerCase && hasDigit && hasSpecialCharacter;
     	
     }
-    
-   
-    
-   
-
-
 }
