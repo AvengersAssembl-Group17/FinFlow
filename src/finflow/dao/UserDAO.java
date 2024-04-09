@@ -10,4 +10,6 @@ public interface UserDAO {
     boolean authenticateUser(String username, String password);
     ResultSet loginUser(String username, String password);
     ResultSet UserDetails(int userid); // New method to retrieve user details
+	boolean updateUserDetails(User user);
+    
 }

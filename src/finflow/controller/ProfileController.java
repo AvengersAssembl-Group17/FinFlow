@@ -71,4 +71,47 @@ public class ProfileController implements Initializable {
             e.printStackTrace();
         }
     }
-}
+    
+    @FXML
+    private void Update(ActionEvent event) {
+        // Retrieve values from text fields
+        String firstName = txtfirstName.getText();
+        String lastName = txtlastName.getText();
+        String phone = txtPhone.getText();
+        String userName = txtuserName.getText();
+
+        if (firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty() || userName.isEmpty()) {
+            showAlert("Error", "Please fill in all fields.");
+            return; // Exit the method if any field is blank
+        }
+        
+        // Create a new User object with the updated details
+        User updatedUser = new User();
+        updatedUser.setUsername(userName);
+        updatedUser.setFirstName(firstName);
+        updatedUser.setLastName(lastName);
+        updatedUser.setPhone(phone);
+        // Assuming you have a way to retrieve the user's ID, for example from a session
+        int userID = LoginController.getInstance().activeID();
+        updatedUser.setId(userID);
+
+        // Perform update operation
+        boolean success = userDAO.updateUserDetails(updatedUser);
+
+        // Show success or failure message
+        if (success) {
+            showAlert("Success", "Profile updated successfully.");
+        } else {
+            showAlert("Error", "Failed to update profile.");
+        }
+    }
+
+    
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+ }

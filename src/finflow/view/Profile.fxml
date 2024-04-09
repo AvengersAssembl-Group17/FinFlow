@@ -32,7 +32,7 @@
          </font>
       </TextField>
       <Label layoutX="90.0" layoutY="163.0" text="Phone:" />
-      <Button fx:id="btnCreateAccount" layoutX="198.0" layoutY="351.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #9AA2E6;" text="UPDATE" textFill="WHITE">
+      <Button fx:id="btnUpdate" layoutX="198.0" layoutY="351.0" mnemonicParsing="false" onAction="#Update" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #9AA2E6;" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="Lato Bold" size="18.0" />
          </font>

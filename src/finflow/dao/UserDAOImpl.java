@@ -1,4 +1,3 @@
-
 package finflow.dao;
 
 import java.sql.Connection;
@@ -107,5 +106,23 @@ public class UserDAOImpl implements UserDAO {
         
         return resultSet;
     }
+
+	@Override
+	public boolean updateUserDetails(User user) {
+	    String query = "UPDATE user SET username = ?, fname = ?, lname = ?, phone = ? WHERE id = ?";
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setString(1, user.getUsername());
+	        preparedStatement.setString(2, user.getFirstName());
+	        preparedStatement.setString(3, user.getLastName());
+	        preparedStatement.setString(4, user.getPhone());
+	        preparedStatement.setInt(5, user.getId()); // Assuming user.getId() returns the user's ID
+	        int rowsAffected = preparedStatement.executeUpdate();
+	        return rowsAffected > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 
 }

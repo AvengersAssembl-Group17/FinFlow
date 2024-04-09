@@ -136,7 +136,7 @@ public class SignUpController implements Initializable{
     // To check if password meets requirement
     /**
      * @param password
-     * @returns boolean for whether passowrd matches or not 
+     * @returns boolean for whether password matches or not 
      * */
     public static boolean isPasswordValid(String password) {
     	boolean upperCase = false;
