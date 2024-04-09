@@ -85,6 +85,30 @@ public class ProfileController implements Initializable {
             return; // Exit the method if any field is blank
         }
         
+        // Validate first name
+        if (!isValidfName(firstName)) {
+            showAlert("Error", "First name should only contain alphabetic characters.");
+            return; 
+        }
+        
+        // Validate first name
+        if (!isValidlName(lastName)) {
+            showAlert("Error", "Last name should only contain alphabetic characters.");
+            return;
+        }
+        
+        // Validate phone number
+        if (!isValidPhone(phone)) {
+            showAlert("Error", "Phone number should only contain numeric characters.");
+            return; 
+        }
+        
+        // Validate phone number length
+        if (phone.length() != 10) {
+            showAlert("Error", "Phone number should be 10 digits long.");
+            return;
+        }
+        
         // Create a new User object with the updated details
         User updatedUser = new User();
         updatedUser.setUsername(userName);
@@ -106,6 +130,20 @@ public class ProfileController implements Initializable {
         }
     }
 
+    private boolean isValidfName(String firstName) {
+        // Regular expression to check if the name contains only alphabetic characters
+        return firstName.matches("[a-zA-Z]+");
+    }
+    
+    private boolean isValidlName(String lastName) {
+        // Regular expression to check if the name contains only alphabetic characters
+        return lastName.matches("[a-zA-Z]+");
+    }
+    
+    private boolean isValidPhone(String phone) {
+        // Regular expression to check if the phone number contains only numeric characters
+        return phone.matches("[0-9]+");
+    }
     
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
