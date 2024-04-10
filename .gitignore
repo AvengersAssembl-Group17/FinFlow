@@ -35,3 +35,4 @@ local.properties
 ## Miscellaneous
 ##############################
 *.log
+/bin/
