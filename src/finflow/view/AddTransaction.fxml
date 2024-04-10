@@ -31,13 +31,13 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="addTransactionBtn" layoutX="102.0" layoutY="340.0" mnemonicParsing="false" onAction="#addTransactionAction" style="-fx-background-color: #708090;" text="Add Transaction" textFill="WHITE">
+      <Button fx:id="addTransactionBtn" layoutX="102.0" layoutY="340.0" mnemonicParsing="false" onAction="#addTransactionAction" style="-fx-background-color: #9AA2E6;" text="Add Transaction" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
       <ComboBox fx:id="transactionType" layoutX="169.0" layoutY="212.0" prefHeight="26.0" prefWidth="161.0" promptText="Select Type" />
-      <Label fx:id="screenTitle" layoutX="129.0" layoutY="65.0" text="Add Transaction">
+      <Label fx:id="screenTitle" layoutX="92.0" layoutY="70.0" text="Add Transaction" textFill="#40396e">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -62,6 +62,6 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="buttonBack" layoutX="23.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickBack" text=" &lt; Back" />
+      <Button fx:id="buttonBack" layoutX="23.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickBack" style="-fx-background-color: #708090;" text=" &lt; Back" textFill="WHITE" />
    </children>
 </AnchorPane>

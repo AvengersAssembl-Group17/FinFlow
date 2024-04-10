@@ -51,8 +51,6 @@ public class TransactionController implements Initializable{
     
     private BorderPane homePane;
        
-    private int transactionTypeID;
-
     private static TransactionController instance;
     
     private TransactionDAO transactionDAO;

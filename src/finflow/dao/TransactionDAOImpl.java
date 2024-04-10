@@ -160,7 +160,11 @@ public class TransactionDAOImpl implements TransactionDAO{
 	@Override
 	public List<Transaction> getTransactionsGroupedByCategory(int userId, String category) {
 	    List<Transaction> transactions = new ArrayList<>();
-	    String query = "SELECT * FROM transaction WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = ?)";
+//	    String query = "SELECT * FROM transaction WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = ?)";
+	    String query = " SELECT u.id as userId, tt.type AS category, SUM(t.amount) AS total_amount"
+	    		+ " FROM transaction t JOIN transactionType tt ON t.type = tt.id"
+	    		+ " JOIN user u ON t.userId = u.id WHERE u.id=? and tt.category = ?"
+	    		+ " GROUP BY tt.type";
 	    try (Connection connection = dbConnection.getConnection();
 	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 	        preparedStatement.setInt(1, userId);
@@ -168,13 +172,9 @@ public class TransactionDAOImpl implements TransactionDAO{
 	        ResultSet resultSet = preparedStatement.executeQuery();
 	        while (resultSet.next()) {
 	            Transaction transaction = new Transaction();
-	            transaction.setTransactionId(resultSet.getInt("id"));
 	            transaction.setUserId(resultSet.getInt("userId"));
-	            transaction.setAmount(resultSet.getDouble("amount"));
-	            transaction.setTitle(resultSet.getString("title"));
-	            transaction.setType(resultSet.getInt("type"));
-	            transaction.setDate(resultSet.getDate("date"));
-	            transaction.setNotes(resultSet.getString("notes"));
+	            transaction.setAmount(resultSet.getDouble("total_amount"));
+	            transaction.setTitle(resultSet.getString("category")); //utilizing title to hold category
 	            transactions.add(transaction);
 	        }
 	    } catch (SQLException e) {
