@@ -73,8 +73,12 @@ public class SignUpController implements Initializable{
                 || txtPassword.getText().isEmpty() || txtConfirmPassword.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
         } else {
+        	if (!txtfirstName.getText().matches("[a-zA-Z]+")) {
+                new Alert(Alert.AlertType.ERROR, "First name should contain only alphabets").showAndWait();
+        	} else if (!txtlastName.getText().matches("[a-zA-Z]+")) {
+                new Alert(Alert.AlertType.ERROR, "Last name should contain only alphabets").showAndWait();
             // Both the password and confirm password should be equal
-            if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
+        	} else if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
                 new Alert(Alert.AlertType.ERROR, "Password does not match with Confim Password !").showAndWait();
             } else if (txtPassword.getText().length() < 8) {
             	 new Alert(Alert.AlertType.ERROR, "Password length should be more than 8 !").showAndWait();
