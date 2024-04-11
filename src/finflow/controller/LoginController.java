@@ -88,7 +88,6 @@ public class LoginController implements Initializable{
         signupPage.setResizable(false);
     }
 
-
     /**
      * @param Action event
      * @throws IOException
@@ -126,5 +125,4 @@ public class LoginController implements Initializable{
             }
         }
     }
-
 }
