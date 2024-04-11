@@ -59,11 +59,16 @@ public class ReportsController {
         pieChartTotal.setData(totalData);
         pieChartTotal.setTitle("Overall Income and Expense");
 
-        populatePieChartWithTransactions(pieChartIncome, incomeTransactions);
-        pieChartIncome.setTitle(Constants.ACTION_INCOME);
-
-        populatePieChartWithTransactions(pieChartExpense, expenseTransactions);
-        pieChartExpense.setTitle(Constants.ACTION_EXPENSE);
+        if(!incomeTransactions.isEmpty()) {
+            populatePieChartWithTransactions(pieChartIncome, incomeTransactions);
+            pieChartIncome.setTitle(Constants.ACTION_INCOME);
+        }
+    
+        if(!expenseTransactions.isEmpty()) {
+        	populatePieChartWithTransactions(pieChartExpense, expenseTransactions);
+            pieChartExpense.setTitle(Constants.ACTION_EXPENSE);
+        }
+        
     }
 
     private void populatePieChartWithTransactions(PieChart pieChart, List<Transaction> transactions) {

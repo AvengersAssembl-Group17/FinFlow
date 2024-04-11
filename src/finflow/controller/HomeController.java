@@ -16,11 +16,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class HomeController implements Initializable{
@@ -53,6 +55,8 @@ public class HomeController implements Initializable{
     
     @FXML
     private VBox transactionLayout;
+    
+    private Label noTransactionsLabel;
     
     private static HomeController instance;
     
@@ -94,11 +98,16 @@ public class HomeController implements Initializable{
         setWelcomeMessage(sb.toString());
         
         this.activeUser= LoginController.getInstance().activeID();
+        
         setTotalIncome();
         setTotalExpense();
         setTotalBalance();
         
-        populateRecentTransaction();
+        noTransactionsLabel = new Label(Constants.NO_TRANSACTION_ALERT);
+        noTransactionsLabel.setTextFill(Color.GREY);
+        noTransactionsLabel.setVisible(false);
+               
+        populateRecentTransaction();  
 	}   
    
     /**
@@ -129,7 +138,12 @@ public class HomeController implements Initializable{
     
     public void populateRecentTransaction() {
     	List<Transaction> recentTrans= new ArrayList<>(getRecenTransaction());
-    	    		
+    	
+    	if (recentTrans.isEmpty())
+    		showNoTransactionsLabel(true);
+        else 
+        	showNoTransactionsLabel(false);
+    	
     	for(int i=0; i<recentTrans.size();i++) {
     		FXMLLoader fxmlLoader = new FXMLLoader();
     		fxmlLoader.setLocation(getClass().getResource("/finflow/view/TransactionItem.fxml"));
@@ -141,7 +155,7 @@ public class HomeController implements Initializable{
     		}catch(IOException e) {
     			e.printStackTrace();
     		}	
-    	}
+    	} 
     }
     
     public List<Transaction> getRecenTransaction(){
@@ -162,5 +176,14 @@ public class HomeController implements Initializable{
     	this.action = Constants.ACTION_EXPENSE;
     	Pane view = fxmlLoader.getPage("AddTransaction");
         homePane.setCenter(view);
+    }
+    
+    private void showNoTransactionsLabel(boolean show) {
+        if (show && !transactionLayout.getChildren().contains(noTransactionsLabel)) {
+        	transactionLayout.getChildren().add(noTransactionsLabel);
+        	noTransactionsLabel.setVisible(true);
+        } else if (!show && transactionLayout.getChildren().contains(noTransactionsLabel)) {
+        	transactionLayout.getChildren().remove(noTransactionsLabel);
+        }
     }
 }

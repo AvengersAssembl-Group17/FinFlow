@@ -2,7 +2,14 @@ package finflow.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import finflow.dao.DatabaseConnection;
+import finflow.dao.TransactionDAO;
+import finflow.dao.TransactionDAOImpl;
+import finflow.model.Transaction;
+import finflow.utils.Constants;
 import finflow.utils.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -43,10 +51,15 @@ public class MenuController implements Initializable{
     private static MenuController instance;
     
     private FxmlLoader fxmlLoader;
+    
+    private List<Transaction> history;
+    
+    private TransactionDAO transDAO;
 
     public MenuController() {
         instance = this;  
         this.fxmlLoader = new FxmlLoader();
+        this.transDAO = new TransactionDAOImpl(new DatabaseConnection());
     }
 
     public static MenuController getInstance() {
@@ -57,6 +70,7 @@ public class MenuController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
         Pane view = fxmlLoader.getPage("Home");
         mainPane.setCenter(view);
+        
 	}   
        
     @FXML
@@ -73,12 +87,30 @@ public class MenuController implements Initializable{
     
     @FXML
     void transactionHistoryAction(ActionEvent event) throws IOException {
+        history = this.transDAO.getRecentTransactions(LoginController.getInstance().activeID(), 0);
+    	if(history.isEmpty()) {
+    		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Recent Transactions");
+            alert.setHeaderText(null);
+            alert.setContentText("You have no recent transactions yet. Start adding transactions to track your finances!");
+            alert.showAndWait();
+            return;
+    	}	
     	Pane view = fxmlLoader.getPage("TransactionHistory");
         mainPane.setCenter(view);
     }
     
     @FXML
     void reportAction(ActionEvent event) throws IOException {
+        history = this.transDAO.getRecentTransactions(LoginController.getInstance().activeID(), 0);
+    	if(history.isEmpty()) {
+    		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Recent Transactions");
+            alert.setHeaderText(null);
+            alert.setContentText("You have no recent transactions yet. Start adding transactions to track your finances!");
+            alert.showAndWait();
+            return;
+    	}	
     	Pane view = fxmlLoader.getPage("Reports");
         mainPane.setCenter(view);
     }
