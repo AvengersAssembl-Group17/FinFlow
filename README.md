@@ -19,7 +19,7 @@ A JavaFX GUI app to track all incoming and outgoing transactions efficiently. It
 - As a user, I should be able to view my transaction history.
 - As a user, I should be able to view reports of my recorded expenses.
 
-Certainly! Here's the updated README.md file with instructions for executing the database scripts before running the project:
+
 
 ---
 
