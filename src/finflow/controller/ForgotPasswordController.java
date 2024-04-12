@@ -59,15 +59,24 @@ public class ForgotPasswordController implements Initializable {
         }
 
         if (!newPassword.equals(retypeNewPassword)) {
-            showAlert(AlertType.ERROR, "Error", "Password Mismatch", "Passwords do not match. Please retype.");
+            showAlert(AlertType.ERROR, "Error", "Password Mismatch", "Passwords do not match. Please type again.");
             return;
         }
 
         // Retrieve the user's ID based on the provided username
         int userID = userDAO.getUserIdByUsername(username);
 
+        //Validation to check if the user exists in the database
         if (userID == -1) {
             showAlert(AlertType.ERROR, "Error", "User Not Found", "The provided username does not exist.");
+            
+            // Clear password fields
+            txtnewPassword.clear();
+            txtretypenewPassword.clear();
+            
+            //Clear username field
+            txtUsername.clear();
+            
             return;
         }
 
