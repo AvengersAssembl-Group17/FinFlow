@@ -15,4 +15,6 @@ public interface TransactionDAO {
 	List<Transaction> getRecentTransactions(int userId, int limit);
 	List<Transaction> getTransactionsGroupedByCategory(int userId, String category);
 	String getTransactionTypeNameById(int typeId);
+	int updateTransactionAmount(int transactionId, double newAmount);
+	int deleteTransaction(int transactionId);
 }
