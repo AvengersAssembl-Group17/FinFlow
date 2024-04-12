@@ -199,5 +199,33 @@ public class TransactionDAOImpl implements TransactionDAO{
         }
         return typeName;
     }
+	
+	@Override
+	public int updateTransactionAmount(int transactionId, double newAmount) {
+	    String query = "UPDATE `transaction` SET amount = ? WHERE id = ?";
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setDouble(1, newAmount);
+	        preparedStatement.setInt(2, transactionId);
+	        return preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
+	}
+
+	
+	@Override
+	public int deleteTransaction(int transactionId) {
+	    String query = "DELETE FROM `transaction` WHERE id = ?";
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setInt(1, transactionId);
+	        return preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
+	}
 
 }
