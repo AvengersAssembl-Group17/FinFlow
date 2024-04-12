@@ -82,7 +82,7 @@ public class TransactionController implements Initializable{
          transactionType.setItems(FXCollections.observableArrayList(transactionTypes));
     }
 
-    @FXML
+	@FXML
     void onClickBack(ActionEvent event) throws IOException {
     	Pane view = fxmlLoader.getPage("Home");
         homePane.setCenter(view);

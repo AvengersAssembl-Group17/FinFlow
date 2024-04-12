@@ -124,4 +124,44 @@ public class UserDAOImpl implements UserDAO {
 	        return false;
 	    }
 	}
+	
+	@Override
+	public boolean updateUserPassword(User user) {
+	    String query = "UPDATE user SET password = ? WHERE username = ?";
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setString(1, user.getPassword());
+	        preparedStatement.setString(2, user.getUsername());
+	        
+	        int rowsUpdated = preparedStatement.executeUpdate();
+
+	        if (rowsUpdated > 0) {
+	            return true; // Password updated successfully
+	        } else {
+	            return false; // No rows were updated, indicating failure
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Print the stack trace for debugging
+	        return false; // Exception occurred, return false
+	    }
+	}
+	
+	@Override
+	public int getUserIdByUsername(String username) {
+	    String query = "SELECT id FROM user WHERE username = ?";
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setString(1, username);
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	                return resultSet.getInt("id");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return -1; // Return -1 if the username doesn't exist or an error occurs
+	}
+
+
 }
