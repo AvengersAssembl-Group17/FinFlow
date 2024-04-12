@@ -163,4 +163,9 @@ public class HomeController implements Initializable{
     	Pane view = fxmlLoader.getPage("AddTransaction");
         homePane.setCenter(view);
     }
+
+	public void setMainPane(BorderPane loginPane) {
+		// TODO Auto-generated method stub
+		
+	}
 }
