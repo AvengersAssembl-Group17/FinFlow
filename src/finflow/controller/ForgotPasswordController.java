@@ -1,4 +1,5 @@
 package finflow.controller;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -8,12 +9,20 @@ import finflow.dao.UserDAOImpl;
 import finflow.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import finflow.utils.FxmlLoader;
 
 public class ForgotPasswordController implements Initializable {
 
@@ -28,6 +37,12 @@ public class ForgotPasswordController implements Initializable {
 
     @FXML
     private Button btnUpdate;
+    
+    @FXML
+    private Button buttonBack;
+    
+    private FxmlLoader fxmlLoader;
+    
 
     private UserDAO userDAO;
 
@@ -70,6 +85,17 @@ public class ForgotPasswordController implements Initializable {
         } else {
             showAlert(AlertType.ERROR, "Error", "Update Failed", "Failed to update password. Please try again later.");
         }
+    }
+    
+    @FXML
+    void onClickBack(ActionEvent event) throws IOException {
+    	buttonBack.getScene().getWindow().hide();
+        Stage signupPage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
+        Scene scene = new Scene(root);
+        signupPage.setScene(scene);
+        signupPage.show();
+        signupPage.setResizable(false);
     }
 
     // Method to show alert dialog
