@@ -9,11 +9,18 @@ import finflow.utils.Constants;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TransactionItemController implements Initializable {
@@ -40,8 +47,16 @@ public class TransactionItemController implements Initializable {
     private Button deleteButton;
 
     private Transaction transaction;
+    
+    private VBox transactionLayout;
 
     private TransactionHistoryController historyController;
+    
+    private HomeController homeController;
+
+    public void setHomeController(HomeController homeController) {
+        this.homeController = homeController;
+    }
 
     public void setData(Transaction trans) {
         this.transaction = trans;
@@ -94,17 +109,36 @@ public class TransactionItemController implements Initializable {
             return;
         }
 
-        TransactionDAO transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
-        int rowsAffected = transactionDAO.deleteTransaction(transaction.getTransactionId());
-        if (rowsAffected > 0) {
-            System.out.println("Transaction deleted successfully.");
-            
-            //historyController.populateTransaction();
-            // Repopulate the transaction history in the UI
-        } else {
-            System.err.println("Failed to delete transaction.");
+        // Show confirmation dialog to the user
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Delete Transaction");
+        alert.setContentText("Are you sure you want to delete this transaction?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            TransactionDAO transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
+            int rowsAffected = transactionDAO.deleteTransaction(transaction.getTransactionId());
+            if (rowsAffected > 0) {
+                System.out.println("Transaction deleted successfully.");
+                
+                // Clear the transaction layout
+                //transactionLayout.getChildren().clear();
+               
+                HomeController.getInstance().clearTransactionLayout();
+                // Update the UI
+               HomeController.getInstance().populateRecentTransaction();
+            } else {
+                // Display error message if deletion fails
+                Alert errorAlert = new Alert(AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Failed to delete transaction");
+                errorAlert.setContentText("An error occurred while deleting the transaction. Please try again.");
+                errorAlert.showAndWait();
+            }
         }
     }
+
 
 
 
