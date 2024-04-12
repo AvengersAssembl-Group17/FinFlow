@@ -65,6 +65,13 @@ public class HomeController implements Initializable{
     private Double totalIncome =0.0;
     private Double totalExpense =0.0;
     private Double totalBalance =0.0;
+    
+
+    // Other fields and methods
+
+    public VBox getTransactionLayout() {
+        return transactionLayout;
+    }
 
     public HomeController() {
         instance = this; 
@@ -105,6 +112,17 @@ public class HomeController implements Initializable{
      * @param user
      * Method sets welcomeMessage
      * */
+    
+//    public void resetHomeScreen() {
+//        // Reset total income, expense, balance
+//        setTotalIncome();
+//        setTotalExpense();
+//        setTotalBalance();
+//        
+//        // Populate recent transactions
+//        populateRecentTransaction();
+//    }
+    
     public void setWelcomeMessage(String message) {
         this.txtWelcomeMessage.setText(message);      
     }
@@ -127,6 +145,12 @@ public class HomeController implements Initializable{
     	this.txtTotalBalance.setText(formattedTotalBalance);
     }
     
+    public List<Transaction> getRecenTransaction(){
+    	List<Transaction> recentTrans= new ArrayList<>();
+    	recentTrans = transDAO.getRecentTransactions(activeUser,Constants.RECENT_TRANSACTION_LIMIT);
+    	return recentTrans;
+    }
+    
     public void populateRecentTransaction() {
     	List<Transaction> recentTrans= new ArrayList<>(getRecenTransaction());
     	    		
@@ -144,10 +168,9 @@ public class HomeController implements Initializable{
     	}
     }
     
-    public List<Transaction> getRecenTransaction(){
-    	List<Transaction> recentTrans= new ArrayList<>();
-    	recentTrans = transDAO.getRecentTransactions(activeUser,Constants.RECENT_TRANSACTION_LIMIT);
-    	return recentTrans;
+ // New method to clear the transaction layout
+    public void clearTransactionLayout() {
+        transactionLayout.getChildren().clear();
     }
     
     @FXML
