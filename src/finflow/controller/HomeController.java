@@ -163,4 +163,16 @@ public class HomeController implements Initializable{
     	Pane view = fxmlLoader.getPage("AddTransaction");
         homePane.setCenter(view);
     }
+    
+    @FXML
+    void updateTransaction(ActionEvent event) throws IOException {
+        // Set the action to indicate that it's an update operation
+        this.action = "Update Transaction";
+        
+        // Load the FXML file for the update window
+        Pane view = fxmlLoader.getPage("UpdateTransaction");
+        
+        // Set the center pane of the home screen to the update window
+        homePane.setCenter(view);
+    }
 }
