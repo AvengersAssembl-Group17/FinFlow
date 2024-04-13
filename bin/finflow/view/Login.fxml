@@ -41,6 +41,6 @@
             <Image url="@../images/homepage.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblForgotPassword" layoutX="574.0" layoutY="450.0" prefHeight="17.0" prefWidth="147.0" text="FORGOT PASSWORD?" />
+      <Label fx:id="lblForgotPassword" layoutX="579.0" layoutY="405.0" prefHeight="17.0" prefWidth="147.0" text="FORGOT PASSWORD?" textFill="#40396e" />
    </children>
 </AnchorPane>
