@@ -5,6 +5,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -28,13 +29,11 @@ public class LoginController implements Initializable{
     @FXML
     private Button btnSignUp;
     @FXML
-    private Button btnForgotPassword;
+    private Label lblForgotPassword; // Changed from Button to Label
 
     private int sessionUserID;
-
-    private static LoginController sessionInstance;
-    
     private UserDAO userDAO;
+    private static LoginController sessionInstance;
 
     // Constructor to initialize userDAO
     public LoginController() {
@@ -68,7 +67,16 @@ public class LoginController implements Initializable{
      * */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.userDAO = new UserDAOImpl(new DatabaseConnection()); // Pass a valid DatabaseConnection instance
+    	this.userDAO = new UserDAOImpl(new DatabaseConnection());
+        
+        // Set the "FORGOT PASSWORD?" label as a hyperlink
+        lblForgotPassword.setOnMouseClicked(event -> {
+            try {
+                forgotpasswordAction(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
      
     
@@ -93,8 +101,8 @@ public class LoginController implements Initializable{
     
     
     @FXML
-    public void forgotpasswordAction(ActionEvent event) throws IOException{
-    	btnForgotPassword.getScene().getWindow().hide();
+    public void forgotpasswordAction(MouseEvent event) throws IOException{
+    	lblForgotPassword.getScene().getWindow().hide();
         Stage forgotPasswordPage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/ForgotPassword.fxml"));
         Scene scene = new Scene(root);
