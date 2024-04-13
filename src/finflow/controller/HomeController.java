@@ -131,7 +131,7 @@ public class HomeController implements Initializable{
     }
     
     public void setTotalBalance() {
-    	this.totalBalance = this.totalIncome - this.totalExpense;
+    	this.totalBalance = this.transDAO.getAvailableBalanceUser(activeUser);
     	String formattedTotalBalance = String.format(Constants.CURRENCY_FORMAT, this.totalBalance);
     	this.txtTotalBalance.setText(formattedTotalBalance);
     }

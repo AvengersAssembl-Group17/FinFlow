@@ -15,4 +15,5 @@ public interface TransactionDAO {
 	List<Transaction> getRecentTransactions(int userId, int limit);
 	List<Transaction> getTransactionsGroupedByCategory(int userId, String category);
 	String getTransactionTypeNameById(int typeId);
+	public Double getAvailableBalanceUser(int userId);
 }

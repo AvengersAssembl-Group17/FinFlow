@@ -10,36 +10,17 @@
 
 <AnchorPane fx:id="addTransaction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="finflow.controller.TransactionController">
    <children>
-      <TextField fx:id="transactionAmount" layoutX="169.0" layoutY="168.0" prefHeight="26.0" prefWidth="161.0" promptText="Enter Amount">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <Label layoutX="35.0" layoutY="169.0" text="Enter Amount">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="36.0" layoutY="250.0" text="Date">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="transactionDate" layoutX="169.0" layoutY="252.0" prefHeight="26.0" prefWidth="161.0" promptText="MM/DD/YYYY" />
-      <Label layoutX="36.0" layoutY="210.0" text="Select Type">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="addTransactionBtn" layoutX="102.0" layoutY="340.0" mnemonicParsing="false" onAction="#addTransactionAction" style="-fx-background-color: #9AA2E6;" text="Add Transaction" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <ComboBox fx:id="transactionType" layoutX="169.0" layoutY="212.0" prefHeight="26.0" prefWidth="161.0" promptText="Select Type" />
+      <Button fx:id="buttonBack" layoutX="23.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickBack" style="-fx-background-color: #708090;" text=" &lt; Back" textFill="WHITE" />
+      
       <Label fx:id="screenTitle" layoutX="92.0" layoutY="70.0" text="Add Transaction" textFill="#40396e">
          <font>
             <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      
+      <Label layoutX="35.0" layoutY="129.0" text="Title">
+         <font>
+            <Font size="20.0" />
          </font>
       </Label>
       <TextField fx:id="transactionTitle" layoutX="169.0" layoutY="128.0" prefHeight="26.0" prefWidth="161.0" promptText="Enter Title">
@@ -47,11 +28,35 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <Label layoutX="35.0" layoutY="129.0" text="Title">
+          
+       <Label layoutX="35.0" layoutY="169.0" text="Enter Amount">
+       <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="transactionAmount" layoutX="169.0" layoutY="168.0" prefHeight="26.0" prefWidth="161.0" promptText="Enter Amount">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+         
+      
+      
+      <Label layoutX="36.0" layoutY="210.0" text="Select Type">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <ComboBox fx:id="transactionType" layoutX="169.0" layoutY="212.0" prefHeight="26.0" prefWidth="161.0" promptText="Select Type" />
+      
+      
+      <Label layoutX="36.0" layoutY="250.0" text="Date">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="transactionDate" layoutX="169.0" layoutY="252.0" prefHeight="26.0" prefWidth="161.0" promptText="MM/DD/YYYY" />
+      
       <TextField fx:id="transactionReference" layoutX="169.0" layoutY="288.0" prefHeight="26.0" prefWidth="161.0" promptText="Enter reference Notes">
          <font>
             <Font size="15.0" />
@@ -62,6 +67,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="buttonBack" layoutX="23.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickBack" style="-fx-background-color: #708090;" text=" &lt; Back" textFill="WHITE" />
+      
+      <Button fx:id="addTransactionBtn" layoutX="102.0" layoutY="340.0" mnemonicParsing="false" onAction="#addTransactionAction" style="-fx-background-color: #9AA2E6;" text="Add Transaction" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      
    </children>
 </AnchorPane>
