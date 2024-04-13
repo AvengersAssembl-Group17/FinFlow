@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -73,42 +74,85 @@ public class TransactionItemController implements Initializable {
         this.historyController = historyController;
     }
     
+//    @FXML
+//    private void handleUpdateTransaction(ActionEvent event) {
+//        // Make the text field visible when clicking the update button
+//        newAmountField.setVisible(true);
+//    }
+//
+//    @FXML
+//    private void handleNewAmountFieldKeyPress(KeyEvent event) {
+//    	if (event.getCode() == KeyCode.ENTER) {
+//            String newAmountText = newAmountField.getText().trim();
+//
+//            double newAmount;
+//            try {
+//                newAmount = Double.parseDouble(newAmountText);
+//
+//                // If parsing succeeds, update the transaction
+//                TransactionDAO transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
+//                transaction.setAmount(newAmount);
+//                int rowsAffected = transactionDAO.updateTransactionAmount(transaction.getTransactionId(), newAmount);
+//                if (rowsAffected > 0) {
+//                    String formattedAmount = String.format(Constants.CURRENCY_FORMAT, newAmount);
+//                    transactionAmount.setText(formattedAmount);
+//                    newAmountField.setVisible(false); // Hide the text field
+//                } else {
+//                    System.err.println("Failed to update transaction amount.");
+//                }
+//            } catch (NumberFormatException e) {
+//                // Display an alert for invalid amount
+//                Alert alert = new Alert(AlertType.ERROR);
+//                alert.setTitle("Error");
+//                alert.setHeaderText("Invalid Amount");
+//                alert.setContentText("Please enter a valid amount.");
+//                alert.showAndWait();
+//            }
+//        }
+//    }
+    
     @FXML
-    private void handleUpdateTransaction(ActionEvent event) {
-        // Make the text field visible when clicking the update button
-        newAmountField.setVisible(true);
-    }
+    private void handleUpdateTransaction() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Update Transaction Amount");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Please enter the new amount:");
 
-    @FXML
-    private void handleNewAmountFieldKeyPress(KeyEvent event) {
-    	if (event.getCode() == KeyCode.ENTER) {
-            String newAmountText = newAmountField.getText().trim();
-
-            double newAmount;
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(amountStr -> {
             try {
-                newAmount = Double.parseDouble(newAmountText);
+                double newAmount = Double.parseDouble(amountStr);
 
-                // If parsing succeeds, update the transaction
+                // Update transaction amount in the database
                 TransactionDAO transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
-                transaction.setAmount(newAmount);
                 int rowsAffected = transactionDAO.updateTransactionAmount(transaction.getTransactionId(), newAmount);
+
                 if (rowsAffected > 0) {
-                    String formattedAmount = String.format(Constants.CURRENCY_FORMAT, newAmount);
-                    transactionAmount.setText(formattedAmount);
-                    newAmountField.setVisible(false); // Hide the text field
+                    // If the update was successful, update the UI
+                    transaction.setAmount(newAmount);
+                    transactionAmount.setText(String.format("$%.2f", newAmount));
+                    HomeController.getInstance().setTotalBalance();
+                    HomeController.getInstance().setTotalExpense();
+                    HomeController.getInstance().setTotalIncome();
                 } else {
-                    System.err.println("Failed to update transaction amount.");
+                    // Handle the case where the update fails
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Failed to update transaction amount.");
+                    alert.showAndWait();
                 }
             } catch (NumberFormatException e) {
-                // Display an alert for invalid amount
+                // Handle the case where the input amount is invalid
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Invalid Amount");
-                alert.setContentText("Please enter a valid amount.");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid amount format!");
                 alert.showAndWait();
             }
-        }
+        });
     }
+
 
 
     @FXML
@@ -137,7 +181,9 @@ public class TransactionItemController implements Initializable {
                 HomeController.getInstance().clearTransactionLayout();
                 // Update the UI
                HomeController.getInstance().populateRecentTransaction();
-               
+               HomeController.getInstance().setTotalBalance();
+               HomeController.getInstance().setTotalExpense();
+               HomeController.getInstance().setTotalIncome();
                if (historyController != null) {
                    historyController.clearTransactionHistoryLayout();
                    historyController.populateTransaction();
