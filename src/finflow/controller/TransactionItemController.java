@@ -16,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -70,37 +72,44 @@ public class TransactionItemController implements Initializable {
     public void setHistoryController(TransactionHistoryController historyController) {
         this.historyController = historyController;
     }
-
+    
     @FXML
     private void handleUpdateTransaction(ActionEvent event) {
-        if (transaction == null) {
-            System.err.println("Transaction is null.");
-            return;
-        }
-
         // Make the text field visible when clicking the update button
         newAmountField.setVisible(true);
+    }
 
-        String newAmountText = newAmountField.getText().trim();
+    @FXML
+    private void handleNewAmountFieldKeyPress(KeyEvent event) {
+    	if (event.getCode() == KeyCode.ENTER) {
+            String newAmountText = newAmountField.getText().trim();
 
-        double newAmount;
-        try {
-            newAmount = Double.parseDouble(newAmountText);
-        } catch (NumberFormatException e) {
-            System.err.println("Invalid new amount.");
-            return;
-        }
+            double newAmount;
+            try {
+                newAmount = Double.parseDouble(newAmountText);
 
-        TransactionDAO transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
-        transaction.setAmount(newAmount);
-        int rowsAffected = transactionDAO.updateTransactionAmount(transaction.getTransactionId(), newAmount);
-        if (rowsAffected > 0) {
-            String formattedAmount = String.format(Constants.CURRENCY_FORMAT, newAmount);
-            transactionAmount.setText(formattedAmount);
-        } else {
-            System.err.println("Failed to update transaction amount.");
+                // If parsing succeeds, update the transaction
+                TransactionDAO transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
+                transaction.setAmount(newAmount);
+                int rowsAffected = transactionDAO.updateTransactionAmount(transaction.getTransactionId(), newAmount);
+                if (rowsAffected > 0) {
+                    String formattedAmount = String.format(Constants.CURRENCY_FORMAT, newAmount);
+                    transactionAmount.setText(formattedAmount);
+                    newAmountField.setVisible(false); // Hide the text field
+                } else {
+                    System.err.println("Failed to update transaction amount.");
+                }
+            } catch (NumberFormatException e) {
+                // Display an alert for invalid amount
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Amount");
+                alert.setContentText("Please enter a valid amount.");
+                alert.showAndWait();
+            }
         }
     }
+
 
     @FXML
     private void handleDeleteTransaction(ActionEvent event) {
