@@ -32,12 +32,12 @@
          </font>
       </TextField>
       <Label layoutX="90.0" layoutY="231.0" text="Phone:" />
-      <Button fx:id="btnUpdate" layoutX="212.0" layoutY="335.0" mnemonicParsing="false" onAction="#Update" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #9AA2E6;" text="UPDATE" textFill="WHITE">
+      <Button fx:id="btnUpdate" layoutX="199.0" layoutY="319.0" mnemonicParsing="false" onAction="#Update" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #9AA2E6;" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="Lato Bold" size="18.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="194.0" layoutY="28.0" prefHeight="27.0" prefWidth="147.0" text="My Profile" textFill="#3d376b">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="35.0" prefHeight="35.0" prefWidth="184.0" text="My Profile" textFill="#3d376b">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
