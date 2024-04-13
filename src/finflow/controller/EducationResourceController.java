@@ -1,85 +1,59 @@
 package finflow.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import finflow.utils.FxmlLoader;
 
 public class EducationResourceController implements Initializable {
 
     @FXML
     private AnchorPane VideoPane;
 
-    private FxmlLoader fxmlLoader;
+    @FXML
+    private WebView videoWebView1;
 
-    private BorderPane EducationResourceMain;
+    @FXML
+    private WebView videoWebView2;
 
-    private static EducationResourceController instance;
+    @FXML
+    private WebView videoWebView3;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.fxmlLoader = new FxmlLoader();
-        this.EducationResourceMain = EducationResourceController.getInstance().getMainPane();
+        double videoWidth = 530.0;
+        double videoHeight = 160.0;
+        double spacing = 16.0; // Adjust as needed for spacing between videos
 
-        // Define dimensions for the videos
-        double videoWidth = 567.0;
-        double videoHeight1 = 133.0;
-        double videoHeight2 = 148.0;
-        double videoHeight3 = 140.0;
-        double spacing = 8.0; // Adjust as needed for spacing between videos
+        // Calculate total height of videos and spacing
+        double totalHeight = (videoHeight * 3) + (spacing * 2);
 
-        // Calculate available height for videos
-        double availableHeight = VideoPane.getPrefHeight() - (4 * spacing); // Subtracting spacing between videos
+        // Calculate top anchor for the first video
+        double topAnchor = (VideoPane.getPrefHeight() - totalHeight) / 2;
 
-        // Calculate dimensions for videos based on available height
-        double actualHeight1 = Math.min(availableHeight / 3, videoHeight1);
-        double actualHeight2 = Math.min(availableHeight / 3, videoHeight2);
-        double actualHeight3 = Math.min(availableHeight / 3, videoHeight3);
+        // Load video 1
+        WebEngine webEngine1 = videoWebView1.getEngine();
+        webEngine1.loadContent("<iframe width=\"" + videoWidth + "\" height=\"" + videoHeight + "\" src=\"https://www.youtube.com/embed/4XZIv4__sQA\" frameborder=\"0\" allowfullscreen></iframe>");
+        AnchorPane.setTopAnchor(videoWebView1, topAnchor + spacing*3);
+        AnchorPane.setLeftAnchor(videoWebView1, 20.0);
+        AnchorPane.setRightAnchor(videoWebView1, 20.0);
 
-        // Load the first video
-        WebView webView1 = new WebView();
-        WebEngine webEngine1 = webView1.getEngine();
-        webEngine1.loadContent("<iframe width=\"" + videoWidth + "\" height=\"" + actualHeight1 + "\" src=\"https://www.youtube.com/embed/4XZIv4__sQA\" frameborder=\"0\" allowfullscreen></iframe>");
-        VideoPane.getChildren().add(webView1);
-        AnchorPane.setTopAnchor(webView1, spacing);
-        AnchorPane.setLeftAnchor(webView1, 7.0);
+        // Load video 2
+        WebEngine webEngine2 = videoWebView2.getEngine();
+        webEngine2.loadContent("<iframe width=\"" + videoWidth + "\" height=\"" + videoHeight + "\" src=\"https://www.youtube.com/embed/spomyrwC3R8\" frameborder=\"0\" allowfullscreen></iframe>");
+        AnchorPane.setTopAnchor(videoWebView2, topAnchor + videoHeight + spacing*4);
+        AnchorPane.setLeftAnchor(videoWebView2, 20.0);
+        AnchorPane.setRightAnchor(videoWebView2, 20.0);
 
-        // Load the second video
-        WebView webView2 = new WebView();
-        WebEngine webEngine2 = webView2.getEngine();
-        webEngine2.loadContent("<iframe width=\"" + videoWidth + "\" height=\"" + actualHeight2 + "\" src=\"https://www.youtube.com/embed/spomyrwC3R8\" frameborder=\"0\" allowfullscreen></iframe>");
-        VideoPane.getChildren().add(webView2);
-        AnchorPane.setTopAnchor(webView2, actualHeight1 + (2 * spacing)); // Add spacing and height of first video
-        AnchorPane.setLeftAnchor(webView2, 7.0);
-
-        // Load the third video
-        WebView webView3 = new WebView();
-        WebEngine webEngine3 = webView3.getEngine();
-        webEngine3.loadContent("<iframe width=\"" + videoWidth + "\" height=\"" + actualHeight3 + "\" src=\"https://www.youtube.com/embed/4j2emMn7UaI\" frameborder=\"0\" allowfullscreen></iframe>");
-        VideoPane.getChildren().add(webView3);
-        AnchorPane.setTopAnchor(webView3, actualHeight1 + actualHeight2 + (3 * spacing)); // Add spacing and height of first two videos
-        AnchorPane.setLeftAnchor(webView3, 7.0);
-    }
-
-
-    public BorderPane getMainPane() {
-        return EducationResourceMain;
-    }
-
-    public EducationResourceController() {
-        instance = this;
-    }
-
-    public static EducationResourceController getInstance() {
-        return instance;
+        // Load video 3
+        WebEngine webEngine3 = videoWebView3.getEngine();
+        webEngine3.loadContent("<iframe width=\"" + videoWidth + "\" height=\"" + videoHeight + "\" src=\"https://www.youtube.com/embed/4j2emMn7UaI\" frameborder=\"0\" allowfullscreen></iframe>");
+        AnchorPane.setTopAnchor(videoWebView3, topAnchor + (videoHeight + spacing*15));
+        AnchorPane.setLeftAnchor(videoWebView3, 20.0);
+        AnchorPane.setRightAnchor(videoWebView3, 20.0);
     }
 }
