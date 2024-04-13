@@ -74,43 +74,6 @@ public class TransactionItemController implements Initializable {
         this.historyController = historyController;
     }
     
-//    @FXML
-//    private void handleUpdateTransaction(ActionEvent event) {
-//        // Make the text field visible when clicking the update button
-//        newAmountField.setVisible(true);
-//    }
-//
-//    @FXML
-//    private void handleNewAmountFieldKeyPress(KeyEvent event) {
-//    	if (event.getCode() == KeyCode.ENTER) {
-//            String newAmountText = newAmountField.getText().trim();
-//
-//            double newAmount;
-//            try {
-//                newAmount = Double.parseDouble(newAmountText);
-//
-//                // If parsing succeeds, update the transaction
-//                TransactionDAO transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
-//                transaction.setAmount(newAmount);
-//                int rowsAffected = transactionDAO.updateTransactionAmount(transaction.getTransactionId(), newAmount);
-//                if (rowsAffected > 0) {
-//                    String formattedAmount = String.format(Constants.CURRENCY_FORMAT, newAmount);
-//                    transactionAmount.setText(formattedAmount);
-//                    newAmountField.setVisible(false); // Hide the text field
-//                } else {
-//                    System.err.println("Failed to update transaction amount.");
-//                }
-//            } catch (NumberFormatException e) {
-//                // Display an alert for invalid amount
-//                Alert alert = new Alert(AlertType.ERROR);
-//                alert.setTitle("Error");
-//                alert.setHeaderText("Invalid Amount");
-//                alert.setContentText("Please enter a valid amount.");
-//                alert.showAndWait();
-//            }
-//        }
-//    }
-    
     @FXML
     private void handleUpdateTransaction() {
         TextInputDialog dialog = new TextInputDialog();
@@ -174,16 +137,12 @@ public class TransactionItemController implements Initializable {
             int rowsAffected = transactionDAO.deleteTransaction(transaction.getTransactionId());
             if (rowsAffected > 0) {
                 System.out.println("Transaction deleted successfully.");
-                
-                // Clear the transaction layout
-                //transactionLayout.getChildren().clear();
                
                 HomeController.getInstance().clearTransactionLayout();
-                // Update the UI
-               HomeController.getInstance().populateRecentTransaction();
-               HomeController.getInstance().setTotalBalance();
-               HomeController.getInstance().setTotalExpense();
-               HomeController.getInstance().setTotalIncome();
+                HomeController.getInstance().populateRecentTransaction();
+                HomeController.getInstance().setTotalBalance();
+                HomeController.getInstance().setTotalExpense();
+                HomeController.getInstance().setTotalIncome();
                if (historyController != null) {
                    historyController.clearTransactionHistoryLayout();
                    historyController.populateTransaction();

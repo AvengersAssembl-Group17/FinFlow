@@ -8,32 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<!-- <HBox prefHeight="51.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="finflow.controller.TransactionItemController">
-   <children>
-      <ImageView fx:id="transactionImg" fitHeight="58.0" fitWidth="58.0">
-         <image>
-            <Image url="@../images/transaction.png" />
-         </image>
-      </ImageView>
-      <Pane prefHeight="58.0" prefWidth="20.0" />
-      <Label fx:id="transactionTitle" prefHeight="55.0" prefWidth="139.0" text="Transaction Title" />
-      <Label fx:id="transactionDate" prefHeight="55.0" prefWidth="180.0" text="Date" textAlignment="RIGHT" />
-      <Label fx:id="transactionNotes" prefHeight="55.0" prefWidth="88.0" text="notes" textAlignment="RIGHT" />
-      <Label fx:id="transactionAmount" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="55.0" prefWidth="130.0" text="\$0.00">
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-      </Label>
-      <Pane prefHeight="58.0" prefWidth="30.0" />
-      <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateTransaction" prefHeight="26.0" prefWidth="150.0" text="Update" />
-      <Pane prefHeight="58.0" prefWidth="30.0" />
-      <Button mnemonicParsing="false" onAction="#handleDeleteTransaction" prefHeight="26.0" prefWidth="150.0" text="Delete" />
-      <TextField fx:id="newAmountField" promptText="New Amount" visible="false" />
-   </children>
-</HBox>
- -->
-
-<HBox prefHeight="10.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="finflow.controller.TransactionItemController">
+<HBox prefHeight="58.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="finflow.controller.TransactionItemController">
    <children>
       <ImageView fx:id="transactionImg" fitHeight="58.0" fitWidth="58.0">
          <image>
@@ -49,15 +24,19 @@
             <Insets />
          </HBox.margin>
       </Label>
-      <Pane prefHeight="71.0" prefWidth="50.0" />
-      <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateTransaction" prefHeight="35.0" prefWidth="43.0">
+      <Pane prefHeight="58.0" prefWidth="73.0" />
+      <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateTransaction" prefHeight="35.0" prefWidth="43.0" HBox.hgrow="ALWAYS">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="27.0">
                <image>
                   <Image url="@../images/Green_pencil.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
+      </Button>
       <Button mnemonicParsing="false" onAction="#handleDeleteTransaction" prefHeight="35.0" prefWidth="48.0">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="30.0">
@@ -65,7 +44,11 @@
                   <Image url="@../images/trash-destructive.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
+      </Button>
    </children>
    <padding>
       <Insets right="10.0" />
