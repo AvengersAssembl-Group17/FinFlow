@@ -126,6 +126,28 @@ public class TransactionDAOImpl implements TransactionDAO{
 	    return totalExpense;
 	}
 	
+	public Double getAvailableBalanceUser(int userId) {
+		String query = "SELECT (SELECT COALESCE(SUM(amount), 0) FROM transaction " +
+	               "WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = 'Income')) " +
+	               "- " +
+	               "(SELECT COALESCE(SUM(amount), 0) FROM transaction " +
+	               "WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = 'Expense')) AS available_balance";
+		double totalBalance = 0.0;
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {	
+	    		preparedStatement.setInt(1, userId);
+	    		preparedStatement.setInt(2, userId);
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	            	totalBalance = resultSet.getDouble("available_balance");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); 
+	    }
+	    return totalBalance;
+	}
+	
 	public List<Transaction> getRecentTransactions(int userId, int limit) {
         List<Transaction> recentTransactions = new ArrayList<>();
         String query = "SELECT * FROM `transaction` t JOIN transactionType tt ON t.type = tt.id where t.userId=? ORDER BY t.date DESC";
