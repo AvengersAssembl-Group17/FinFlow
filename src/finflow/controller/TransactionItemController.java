@@ -128,6 +128,11 @@ public class TransactionItemController implements Initializable {
                 HomeController.getInstance().clearTransactionLayout();
                 // Update the UI
                HomeController.getInstance().populateRecentTransaction();
+               
+               if (historyController != null) {
+                   historyController.clearTransactionHistoryLayout();
+                   historyController.populateTransaction();
+               }
             } else {
                 // Display error message if deletion fails
                 Alert errorAlert = new Alert(AlertType.ERROR);
