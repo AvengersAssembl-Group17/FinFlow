@@ -53,7 +53,7 @@
       <Pane prefHeight="58.0" prefWidth="30.0" />
       <Pane prefHeight="26.0" prefWidth="30.0" />
       <Pane prefHeight="58.0" prefWidth="30.0" />
-      <TextField fx:id="newAmountField" prefHeight="26.0" prefWidth="160.0" promptText="New Amount" visible="false" />
+      <TextField fx:id="newAmountField" prefHeight="26.0" prefWidth="160.0" promptText="New Amount" visible="false" onKeyPressed="#handleNewAmountFieldKeyPress" />
       <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateTransaction" prefHeight="26.0" prefWidth="88.0" text="Update" />
       <Button mnemonicParsing="false" onAction="#handleDeleteTransaction" prefHeight="26.0" prefWidth="81.0" text="Delete" />
    </children>
@@ -64,3 +64,4 @@
       <Insets top="10.0" />
    </HBox.margin>
 </HBox>
+
