@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -222,34 +223,24 @@ public class TransactionDAOImpl implements TransactionDAO{
         return typeName;
     }
 	
-//	@Override
-//	public int updateTransactionAmount(int transactionId, double newAmount) {
-//	    String query = "UPDATE `transaction` SET amount = ? WHERE id = ?";
-//	    try (Connection connection = dbConnection.getConnection();
-//	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//	        preparedStatement.setDouble(1, newAmount);
-//	        preparedStatement.setInt(2, transactionId);
-//	        return preparedStatement.executeUpdate();
-//	    } catch (SQLException e) {
-//	        e.printStackTrace();
-//	        return 0;
-//	    }
-//	}
 	
 	@Override
-	public int updateTransactionDetails(int transactionId, String newTitle, double newAmount) {
-	    String query = "UPDATE `transaction` SET title = ?, amount = ? WHERE id = ?";
+	public int updateTransactionDetails(int transactionId, String newTitle, double newAmount, Date newDate) {
+	    String query = "UPDATE `transaction` SET title = ?, amount = ?, date = ? WHERE id = ?";
 	    try (Connection connection = dbConnection.getConnection();
 	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 	        preparedStatement.setString(1, newTitle);
 	        preparedStatement.setDouble(2, newAmount);
-	        preparedStatement.setInt(3, transactionId);
+	        preparedStatement.setDate(3, newDate);
+	        preparedStatement.setInt(4, transactionId);
 	        return preparedStatement.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return 0;
 	    }
 	}
+
+
 
 	
 	@Override
