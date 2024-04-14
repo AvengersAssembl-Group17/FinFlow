@@ -133,6 +133,8 @@ public class SignUpController implements Initializable{
         btnCreateAccount.getScene().getWindow().hide();
         Stage login = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
+        Image image = new Image("finflow/images/logo2.png");
+        login.getIcons().add(image);
         Scene scene = new Scene(root);
         login.setScene(scene);
         login.show();
