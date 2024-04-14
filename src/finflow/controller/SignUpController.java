@@ -113,6 +113,8 @@ public class SignUpController implements Initializable{
                 Stage profileStage = new Stage();
                 Parent profileRoot = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
                 Scene profileScene = new Scene(profileRoot);
+                Image image = new Image("finflow/images/logo2.png");
+                profileStage.getIcons().add(image);
                 profileStage.setScene(profileScene);
                 profileStage.show();
             }

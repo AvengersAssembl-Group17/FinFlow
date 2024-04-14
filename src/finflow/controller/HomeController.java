@@ -187,19 +187,7 @@ public class HomeController implements Initializable{
         homePane.setCenter(view);
     }
     
-    @FXML
-    void updateTransaction(ActionEvent event) throws IOException {
-        // Set the action to indicate that it's an update operation
-        this.action = "Update Transaction";
-        
-        // Load the FXML file for the update window
-        Pane view = fxmlLoader.getPage("UpdateTransaction");
-        
-        // Set the center pane of the home screen to the update window
-        homePane.setCenter(view);
-    }
-    
-        private void showNoTransactionsLabel(boolean show) {
+    private void showNoTransactionsLabel(boolean show) {
         if (show && !transactionLayout.getChildren().contains(noTransactionsLabel)) {
         	transactionLayout.getChildren().add(noTransactionsLabel);
         	noTransactionsLabel.setVisible(true);

@@ -18,7 +18,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.Optional;
@@ -51,15 +50,7 @@ public class TransactionItemController implements Initializable {
 
     private Transaction transaction;
     
-    private VBox transactionLayout;
-
     private TransactionHistoryController historyController;
-    
-    private HomeController homeController;
-
-    public void setHomeController(HomeController homeController) {
-        this.homeController = homeController;
-    }
     
     private TransactionDAO transDAO;
     

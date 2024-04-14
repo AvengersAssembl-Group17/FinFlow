@@ -19,10 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import finflow.utils.FxmlLoader;
 
 public class ForgotPasswordController implements Initializable {
 
@@ -39,10 +36,7 @@ public class ForgotPasswordController implements Initializable {
     private Button btnUpdate;
     
     @FXML
-    private Button buttonBack;
-    
-    private FxmlLoader fxmlLoader;
-    
+    private Button buttonBack;    
 
     private UserDAO userDAO;
 
@@ -102,6 +96,8 @@ public class ForgotPasswordController implements Initializable {
         Stage signupPage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
         Scene scene = new Scene(root);
+        Image image = new Image("finflow/images/logo2.png");
+        signupPage.getIcons().add(image);
         signupPage.setScene(scene);
         signupPage.show();
         signupPage.setResizable(false);

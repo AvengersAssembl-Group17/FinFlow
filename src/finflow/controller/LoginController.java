@@ -106,8 +106,8 @@ public class LoginController implements Initializable{
         Stage forgotPasswordPage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/ForgotPassword.fxml"));
         Scene scene = new Scene(root);
-       // Image image = new Image("finflow/images/logo2.png");
-       // forgotPasswordPage.getIcons().add(image);
+        Image image = new Image("finflow/images/logo2.png");
+        forgotPasswordPage.getIcons().add(image);
         forgotPasswordPage.setScene(scene);
         forgotPasswordPage.show();
         forgotPasswordPage.setResizable(false);

@@ -25,8 +25,6 @@ public class TransactionHistoryController implements Initializable {
 	
 	private int activeUser;
 	
-	private TransactionItemController itemController; 
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	this.transDAO = new TransactionDAOImpl(new DatabaseConnection());

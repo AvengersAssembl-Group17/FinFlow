@@ -9,7 +9,6 @@ import finflow.dao.DatabaseConnection;
 import finflow.dao.TransactionDAO;
 import finflow.dao.TransactionDAOImpl;
 import finflow.model.Transaction;
-import finflow.utils.Constants;
 import finflow.utils.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

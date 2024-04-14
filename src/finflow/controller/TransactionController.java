@@ -142,8 +142,8 @@ public class TransactionController implements Initializable{
         ButtonType result = null;
         
         if (transAmount > availableBalance && action.equalsIgnoreCase(Constants.ACTION_EXPENSE)) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Transaction Info");
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Transaction Amount Exceeds Available Funds");
             alert.setContentText("Click OK to proceed, or Cancel to abort.");
             

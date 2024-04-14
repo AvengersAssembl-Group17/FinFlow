@@ -42,7 +42,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="txtTotalExpense" fill="#d22a17" layoutX="14.0" layoutY="67.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
+                        <Text fx:id="txtTotalExpense" fill="#d22a17" layoutX="11.0" layoutY="64.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -57,7 +57,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="txtTotalBalance" fill="#7c807c" layoutX="15.0" layoutY="66.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
+                        <Text fx:id="txtTotalBalance" fill="#7c807c" layoutX="14.0" layoutY="64.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="105.33328247070312">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -72,7 +72,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="txtTotalIncome" fill="#96c362" layoutX="10.0" layoutY="67.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="115.99996948242188">
+                        <Text fx:id="txtTotalIncome" fill="#96c362" layoutX="14.0" layoutY="66.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.00" wrappingWidth="115.99996948242188">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>

@@ -150,7 +150,7 @@ public class TransactionDAOImpl implements TransactionDAO{
 	
 	public List<Transaction> getRecentTransactions(int userId, int limit) {
         List<Transaction> recentTransactions = new ArrayList<>();
-        String query = "SELECT * FROM `transaction` t JOIN transactionType tt ON t.type = tt.id where t.userId=? ORDER BY t.date DESC";
+        String query = "SELECT * FROM `transaction` t JOIN transactionType tt ON t.type = tt.id where t.userId=? ORDER BY t.date DESC, t.id DESC";
         if (limit > 0) {
         	query += " LIMIT ?";
         }
