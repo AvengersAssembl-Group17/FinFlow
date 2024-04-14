@@ -1,0 +1,12 @@
+.menuItem{
+	-fx-background-color: #40396E
+}
+.menuItem:hover {
+    -fx-background-color: #4C4484;
+
+}
+
+.menuItem:pressed:hover {
+    -fx-background-color: #4C4484;
+
+}
