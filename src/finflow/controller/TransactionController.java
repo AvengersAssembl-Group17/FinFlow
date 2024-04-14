@@ -139,7 +139,7 @@ public class TransactionController implements Initializable{
         transaction.setNotes(transactionReference.getText());
         transaction.setUserId(activeID);
         int status=0;
-        ButtonType result = null;
+        Optional<ButtonType> result = null;
         
         if (transAmount > availableBalance && action.equalsIgnoreCase(Constants.ACTION_EXPENSE)) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -147,14 +147,14 @@ public class TransactionController implements Initializable{
             alert.setHeaderText("Transaction Amount Exceeds Available Funds");
             alert.setContentText("Click OK to proceed, or Cancel to abort.");
             
-            result = alert.showAndWait().orElse(ButtonType.CANCEL);
+            result = alert.showAndWait();
          }
         
         if (action.equalsIgnoreCase(Constants.ACTION_INCOME) || 
-        		(action.equalsIgnoreCase(Constants.ACTION_EXPENSE) && result == ButtonType.OK)) {
+        		(action.equalsIgnoreCase(Constants.ACTION_EXPENSE) && result.isPresent() && result.get() == ButtonType.OK)) {
             status =  transactionDAO.saveTransaction(transaction);  
         } else {
-            System.out.println("User clicked Cancel or closed the dialog, aborting...");
+            System.out.println("User clicked Cancel or closed the dialog, aborting add transaction");
             return;
         }
         

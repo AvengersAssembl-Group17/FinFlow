@@ -75,7 +75,6 @@ public class ReportsController {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         for (Transaction transaction : transactions) {
         	String amount= String.format(Constants.CURRENCY_FORMAT,transaction.getAmount());
-        	System.out.println(transaction.getTitle());
             String label = transaction.getTitle() + " - " + amount; 
             PieChart.Data pieData = new PieChart.Data(label, transaction.getAmount());
             data.add(pieData);
