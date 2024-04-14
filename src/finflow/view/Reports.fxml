@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -10,16 +11,24 @@
     <children>
       <BorderPane prefHeight="600.0" prefWidth="515.0">
          <center>
-            <AnchorPane prefHeight="1215.0" prefWidth="515.0" BorderPane.alignment="CENTER">
+            <AnchorPane BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#40396e" layoutX="34.0" layoutY="55.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="64.66668701171875">
+                  <Text fill="#40396e" layoutX="18.0" layoutY="67.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="160.4444122314453">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <PieChart fx:id="pieChartTotal" layoutX="137.0" layoutY="59.0" prefHeight="229.0" prefWidth="252.0" />
-                  <PieChart fx:id="pieChartIncome" layoutX="9.0" layoutY="291.0" prefHeight="270.0" prefWidth="254.0" />
-                  <PieChart fx:id="pieChartExpense" layoutX="264.0" layoutY="297.0" prefHeight="285.0" prefWidth="242.0" />
+                  <ScrollPane layoutX="18.0" layoutY="93.0" prefHeight="508.0" prefWidth="515.0">
+                     <content>
+                        <AnchorPane prefHeight="1131.0" prefWidth="595.0">
+                           <children>
+                              <PieChart fx:id="pieChartTotal" layoutX="137.0" layoutY="59.0" prefHeight="229.0" prefWidth="252.0" />
+                              <PieChart fx:id="pieChartIncome" layoutX="9.0" layoutY="291.0" prefHeight="270.0" prefWidth="254.0" />
+                              <PieChart fx:id="pieChartExpense" layoutX="264.0" layoutY="297.0" prefHeight="333.0" prefWidth="331.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
          </center>
