@@ -3,6 +3,7 @@ package finflow.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import finflow.dao.DatabaseConnection;
@@ -147,26 +148,29 @@ public class HomeController implements Initializable{
     }
     
     public void populateRecentTransaction() {
-    	List<Transaction> recentTrans= new ArrayList<>(getRecenTransaction());
-    	
-    	if (recentTrans.isEmpty())
-    		showNoTransactionsLabel(true);
+        List<Transaction> recentTrans = new ArrayList<>(getRecenTransaction());
+        Iterator<Transaction> iterator = recentTrans.iterator();
+        
+        if (recentTrans.isEmpty())
+            showNoTransactionsLabel(true);
         else 
-        	showNoTransactionsLabel(false);
-    	
-    	for(int i=0; i<recentTrans.size();i++) {
-    		FXMLLoader fxmlLoader = new FXMLLoader();
-    		fxmlLoader.setLocation(getClass().getResource("/finflow/view/TransactionItem.fxml"));
-    		try {
-        		HBox hbox = fxmlLoader.load();
-        		TransactionItemController tic = fxmlLoader.getController();
-        		tic.setData(recentTrans.get(i));
-        		transactionLayout.getChildren().add(hbox);
-    		}catch(IOException e) {
-    			e.printStackTrace();
-    		}	
-    	} 
+            showNoTransactionsLabel(false);
+
+        while (iterator.hasNext()) {
+            Transaction transaction = iterator.next();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/finflow/view/TransactionItem.fxml"));
+            try {
+                HBox hbox = fxmlLoader.load();
+                TransactionItemController tic = fxmlLoader.getController();
+                tic.setData(transaction);
+                transactionLayout.getChildren().add(hbox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } 
     }
+
     
  // New method to clear the transaction layout
     public void clearTransactionLayout() {
