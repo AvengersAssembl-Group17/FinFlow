@@ -24,7 +24,6 @@ CREATE TABLE finflow.transaction (
   `title` varchar(255) NOT NULL,
   `type` int NOT NULL,
   `date` date NOT NULL,
-  `notes` varchar(255) DEFAULT NULL,
    PRIMARY KEY (`id`),
    FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
    FOREIGN KEY (`type`) REFERENCES `transactionType` (`id`)
