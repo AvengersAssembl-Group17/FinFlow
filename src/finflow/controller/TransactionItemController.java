@@ -2,9 +2,7 @@ package finflow.controller;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ResourceBundle;
 import finflow.dao.DatabaseConnection;
 import finflow.dao.TransactionDAO;
@@ -26,13 +24,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.util.Pair;
-
-
 import java.util.Optional;
 import java.sql.Date;
 

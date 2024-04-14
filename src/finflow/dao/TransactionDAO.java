@@ -1,7 +1,6 @@
 package finflow.dao;
 
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.sql.Date;
 import java.util.List;
 

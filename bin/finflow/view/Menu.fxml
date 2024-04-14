@@ -17,13 +17,21 @@
          <left>
             <VBox prefHeight="600.0" prefWidth="269.0" style="-fx-background-color: #40396e;" stylesheets="@../stylesheet/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="37.0" prefWidth="287.0" />
+                  <Pane prefHeight="19.0" prefWidth="287.0" />
+                  <ImageView fitHeight="73.0" fitWidth="86.0" nodeOrientation="INHERIT">
+                     <image>
+                        <Image url="@../images/logo2.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="90.0" />
+                     </VBox.margin>
+                  </ImageView>
                   <Text fill="#96c362" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Finflow" textAlignment="CENTER" wrappingWidth="286.32179260253906">
                      <font>
                         <Font name="Comic Sans MS Bold Italic" size="43.0" />
                      </font>
                   </Text>
-                  <Pane prefHeight="37.0" prefWidth="287.0" />
+                  <Pane prefHeight="14.0" prefWidth="287.0" />
                   <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#homeAction" prefHeight="45.0" prefWidth="304.0" styleClass="menuItem" stylesheets="@../stylesheet/style.css" text="Home" textFill="WHITE">
                      <font>
                         <Font name="Lato Bold" size="18.0" />
