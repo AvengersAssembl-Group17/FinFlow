@@ -18,9 +18,9 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ScrollPane layoutX="36.0" layoutY="98.0" prefHeight="301.0" prefWidth="456.0">
+                  <ScrollPane layoutX="37.0" layoutY="94.0" prefHeight="468.0" prefWidth="508.0">
                      <content>
-                        <VBox fx:id="transactionHistoryLayout" prefHeight="301.0" prefWidth="456.0" />
+                        <VBox fx:id="transactionHistoryLayout" prefHeight="665.0" prefWidth="455.0" />
                      </content>
                   </ScrollPane>
                </children>

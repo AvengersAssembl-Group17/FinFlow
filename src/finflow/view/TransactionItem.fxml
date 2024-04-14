@@ -18,13 +18,12 @@
       <Pane prefHeight="58.0" prefWidth="20.0" />
       <Label fx:id="transactionTitle" prefHeight="55.0" prefWidth="169.0" text="Transaction Title" />
       <Label fx:id="transactionDate" prefHeight="55.0" prefWidth="166.0" text="Date" textAlignment="RIGHT" />
-      <Label fx:id="transactionNotes" prefHeight="55.0" prefWidth="37.0" text="notes" />
       <Label fx:id="transactionAmount" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="55.0" prefWidth="120.0" text="\$0.00">
          <HBox.margin>
             <Insets />
          </HBox.margin>
       </Label>
-      <Pane prefHeight="58.0" prefWidth="73.0" />
+      <Pane prefHeight="58.0" prefWidth="64.0" />
       <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateTransaction" prefHeight="35.0" prefWidth="43.0" HBox.hgrow="ALWAYS">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="27.0">
