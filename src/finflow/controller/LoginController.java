@@ -27,6 +27,8 @@ public class LoginController implements Initializable{
     private Button btnLogin;
     @FXML
     private Button btnSignUp;
+    @FXML
+    private Button btnForgotPassword;
 
     private int sessionUserID;
 
@@ -88,7 +90,20 @@ public class LoginController implements Initializable{
         signupPage.setResizable(false);
     }
 
-
+    
+    
+    @FXML
+    public void forgotpasswordAction(ActionEvent event) throws IOException{
+    	btnForgotPassword.getScene().getWindow().hide();
+        Stage forgotPasswordPage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/ForgotPassword.fxml"));
+        Scene scene = new Scene(root);
+       // Image image = new Image("finflow/images/logo2.png");
+       // forgotPasswordPage.getIcons().add(image);
+        forgotPasswordPage.setScene(scene);
+        forgotPasswordPage.show();
+        forgotPasswordPage.setResizable(false);
+    }
     /**
      * @param Action event
      * @throws IOException

@@ -41,5 +41,10 @@
             <Image url="@../images/homepage.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnForgotPassword" layoutX="531.0" layoutY="432.0" mnemonicParsing="false" onAction="#forgotpasswordAction" prefHeight="35.0" prefWidth="217.0" style="-fx-background-color: #40396E;" text="FORGOT PASSWORD?" textFill="#fffbfb">
+         <font>
+            <Font name="Lato Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

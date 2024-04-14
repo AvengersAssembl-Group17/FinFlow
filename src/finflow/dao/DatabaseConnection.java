@@ -14,7 +14,7 @@ public class DatabaseConnection extends Config {
     }
 
     public Connection getConnection(){
-        String connectionString = "jdbc:mysql://" + dbhost + ":" + dbport + "/" + dbname + "?autoReconnect=true&useSSL=false";
+        String connectionString = "jdbc:mysql://" + dbhost + ":" + dbport + "/" + dbname + "?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.dbConnection = DriverManager.getConnection(connectionString, dbuser, dbpass);

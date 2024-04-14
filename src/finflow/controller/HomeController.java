@@ -16,11 +16,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class HomeController implements Initializable{
@@ -54,6 +56,8 @@ public class HomeController implements Initializable{
     @FXML
     private VBox transactionLayout;
     
+    private Label noTransactionsLabel;
+    
     private static HomeController instance;
     
     private TransactionDAO transDAO;
@@ -66,9 +70,6 @@ public class HomeController implements Initializable{
     private Double totalExpense =0.0;
     private Double totalBalance =0.0;
     
-
-    // Other fields and methods
-
     public VBox getTransactionLayout() {
         return transactionLayout;
     }
@@ -101,28 +102,22 @@ public class HomeController implements Initializable{
         setWelcomeMessage(sb.toString());
         
         this.activeUser= LoginController.getInstance().activeID();
+        
         setTotalIncome();
         setTotalExpense();
         setTotalBalance();
         
-        populateRecentTransaction();
+        noTransactionsLabel = new Label(Constants.NO_TRANSACTION_ALERT);
+        noTransactionsLabel.setTextFill(Color.GREY);
+        noTransactionsLabel.setVisible(false);
+               
+        populateRecentTransaction();  
 	}   
    
     /**
      * @param user
      * Method sets welcomeMessage
      * */
-    
-//    public void resetHomeScreen() {
-//        // Reset total income, expense, balance
-//        setTotalIncome();
-//        setTotalExpense();
-//        setTotalBalance();
-//        
-//        // Populate recent transactions
-//        populateRecentTransaction();
-//    }
-    
     public void setWelcomeMessage(String message) {
         this.txtWelcomeMessage.setText(message);      
     }
@@ -140,7 +135,7 @@ public class HomeController implements Initializable{
     }
     
     public void setTotalBalance() {
-    	this.totalBalance = this.totalIncome - this.totalExpense;
+    	this.totalBalance = this.transDAO.getAvailableBalanceUser(activeUser);
     	String formattedTotalBalance = String.format(Constants.CURRENCY_FORMAT, this.totalBalance);
     	this.txtTotalBalance.setText(formattedTotalBalance);
     }
@@ -153,7 +148,12 @@ public class HomeController implements Initializable{
     
     public void populateRecentTransaction() {
     	List<Transaction> recentTrans= new ArrayList<>(getRecenTransaction());
-    	    		
+    	
+    	if (recentTrans.isEmpty())
+    		showNoTransactionsLabel(true);
+        else 
+        	showNoTransactionsLabel(false);
+    	
     	for(int i=0; i<recentTrans.size();i++) {
     		FXMLLoader fxmlLoader = new FXMLLoader();
     		fxmlLoader.setLocation(getClass().getResource("/finflow/view/TransactionItem.fxml"));
@@ -165,7 +165,7 @@ public class HomeController implements Initializable{
     		}catch(IOException e) {
     			e.printStackTrace();
     		}	
-    	}
+    	} 
     }
     
  // New method to clear the transaction layout
@@ -197,5 +197,14 @@ public class HomeController implements Initializable{
         
         // Set the center pane of the home screen to the update window
         homePane.setCenter(view);
+    }
+    
+        private void showNoTransactionsLabel(boolean show) {
+        if (show && !transactionLayout.getChildren().contains(noTransactionsLabel)) {
+        	transactionLayout.getChildren().add(noTransactionsLabel);
+        	noTransactionsLabel.setVisible(true);
+        } else if (!show && transactionLayout.getChildren().contains(noTransactionsLabel)) {
+        	transactionLayout.getChildren().remove(noTransactionsLabel);
+        }
     }
 }

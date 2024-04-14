@@ -1,3 +1,4 @@
+
 package finflow.controller;
 
 import javafx.event.ActionEvent;
@@ -72,8 +73,12 @@ public class SignUpController implements Initializable{
                 || txtPassword.getText().isEmpty() || txtConfirmPassword.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
         } else {
+        	if (!txtfirstName.getText().matches("[a-zA-Z]+")) {
+                new Alert(Alert.AlertType.ERROR, "First name should contain only alphabets").showAndWait();
+        	} else if (!txtlastName.getText().matches("[a-zA-Z]+")) {
+                new Alert(Alert.AlertType.ERROR, "Last name should contain only alphabets").showAndWait();
             // Both the password and confirm password should be equal
-            if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
+        	} else if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
                 new Alert(Alert.AlertType.ERROR, "Password does not match with Confim Password !").showAndWait();
             } else if (txtPassword.getText().length() < 8) {
             	 new Alert(Alert.AlertType.ERROR, "Password length should be more than 8 !").showAndWait();
@@ -105,14 +110,11 @@ public class SignUpController implements Initializable{
 
                 // Hide the SignUp screen and go back to the Login page, allowing them to enter their credentials
                 btnCreateAccount.getScene().getWindow().hide();
-                Stage dashboard = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
-                Image image = new Image("finflow/images/logo2.png");
-                Scene scene = new Scene(root);
-                dashboard.getIcons().add(image);
-                dashboard.setScene(scene);
-                dashboard.setResizable(false);
-                dashboard.show();
+                Stage profileStage = new Stage();
+                Parent profileRoot = FXMLLoader.load(getClass().getResource("/finflow/view/Login.fxml"));
+                Scene profileScene = new Scene(profileRoot);
+                profileStage.setScene(profileScene);
+                profileStage.show();
             }
         }
     }
@@ -138,7 +140,7 @@ public class SignUpController implements Initializable{
     // To check if password meets requirement
     /**
      * @param password
-     * @returns boolean for whether passowrd matches or not 
+     * @returns boolean for whether password matches or not 
      * */
     public static boolean isPasswordValid(String password) {
     	boolean upperCase = false;
@@ -158,10 +160,4 @@ public class SignUpController implements Initializable{
     	return upperCase && lowerCase && hasDigit && hasSpecialCharacter;
     	
     }
-    
-   
-    
-   
-
-
 }

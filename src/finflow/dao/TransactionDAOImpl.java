@@ -126,6 +126,28 @@ public class TransactionDAOImpl implements TransactionDAO{
 	    return totalExpense;
 	}
 	
+	public Double getAvailableBalanceUser(int userId) {
+		String query = "SELECT (SELECT COALESCE(SUM(amount), 0) FROM transaction " +
+	               "WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = 'Income')) " +
+	               "- " +
+	               "(SELECT COALESCE(SUM(amount), 0) FROM transaction " +
+	               "WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = 'Expense')) AS available_balance";
+		double totalBalance = 0.0;
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {	
+	    		preparedStatement.setInt(1, userId);
+	    		preparedStatement.setInt(2, userId);
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	            	totalBalance = resultSet.getDouble("available_balance");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); 
+	    }
+	    return totalBalance;
+	}
+	
 	public List<Transaction> getRecentTransactions(int userId, int limit) {
         List<Transaction> recentTransactions = new ArrayList<>();
         String query = "SELECT * FROM `transaction` t JOIN transactionType tt ON t.type = tt.id where t.userId=? ORDER BY t.date DESC";
@@ -160,7 +182,11 @@ public class TransactionDAOImpl implements TransactionDAO{
 	@Override
 	public List<Transaction> getTransactionsGroupedByCategory(int userId, String category) {
 	    List<Transaction> transactions = new ArrayList<>();
-	    String query = "SELECT * FROM transaction WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = ?)";
+//	    String query = "SELECT * FROM transaction WHERE userId = ? AND type IN (SELECT id FROM transactionType WHERE category = ?)";
+	    String query = " SELECT u.id as userId, tt.type AS category, SUM(t.amount) AS total_amount"
+	    		+ " FROM transaction t JOIN transactionType tt ON t.type = tt.id"
+	    		+ " JOIN user u ON t.userId = u.id WHERE u.id=? and tt.category = ?"
+	    		+ " GROUP BY tt.type";
 	    try (Connection connection = dbConnection.getConnection();
 	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 	        preparedStatement.setInt(1, userId);
@@ -168,13 +194,9 @@ public class TransactionDAOImpl implements TransactionDAO{
 	        ResultSet resultSet = preparedStatement.executeQuery();
 	        while (resultSet.next()) {
 	            Transaction transaction = new Transaction();
-	            transaction.setTransactionId(resultSet.getInt("id"));
 	            transaction.setUserId(resultSet.getInt("userId"));
-	            transaction.setAmount(resultSet.getDouble("amount"));
-	            transaction.setTitle(resultSet.getString("title"));
-	            transaction.setType(resultSet.getInt("type"));
-	            transaction.setDate(resultSet.getDate("date"));
-	            transaction.setNotes(resultSet.getString("notes"));
+	            transaction.setAmount(resultSet.getDouble("total_amount"));
+	            transaction.setTitle(resultSet.getString("category")); //utilizing title to hold category
 	            transactions.add(transaction);
 	        }
 	    } catch (SQLException e) {

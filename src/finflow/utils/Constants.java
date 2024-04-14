@@ -22,6 +22,7 @@ public class Constants {
         IMAGE_MAP.put("Clothes", "clothes_image");
         IMAGE_MAP.put("Utilities", "utilities_image");
     }
-    
+    public static final String NO_TRANSACTION_ALERT = "No recent transactions. Start adding transactions to track your finances!";
+ 
     
 }

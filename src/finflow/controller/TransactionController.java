@@ -3,6 +3,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import finflow.dao.DatabaseConnection;
 import finflow.dao.TransactionDAOImpl;
 import finflow.dao.TransactionDAO;
 import finflow.model.Transaction;
+import finflow.utils.Constants;
 import finflow.utils.FxmlLoader;
 
 public class TransactionController implements Initializable{
@@ -51,11 +53,13 @@ public class TransactionController implements Initializable{
     
     private BorderPane homePane;
        
-    private int transactionTypeID;
-
     private static TransactionController instance;
     
     private TransactionDAO transactionDAO;
+    
+    private int activeID;
+    
+    private String action;
 
     public TransactionController() {
         instance = this;
@@ -70,21 +74,22 @@ public class TransactionController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
     	 this.transactionDAO = new TransactionDAOImpl(new DatabaseConnection());
     	 homePane = HomeController.getInstance().getMainPane();  
-    	 String action = HomeController.getInstance().actionPerformed();
+    	 activeID= LoginController.getInstance().activeID();
+    	 action = HomeController.getInstance().actionPerformed();
     	 
     	 transactionTypes = new ArrayList<>();
 
-    	 if(action.equalsIgnoreCase("Income")) {
-    	        List<String> incomeTypes = transactionDAO.getTransactionTypesByCategory("Income");
+    	 if(action.equalsIgnoreCase(Constants.ACTION_INCOME)) {
+    	        List<String> incomeTypes = transactionDAO.getTransactionTypesByCategory(Constants.ACTION_INCOME);
     	        transactionTypes.addAll(incomeTypes);
-    	  } else if(action.equalsIgnoreCase("Expense")){
-    	        List<String> expenseTypes = transactionDAO.getTransactionTypesByCategory("Expense");
+    	  } else if(action.equalsIgnoreCase(Constants.ACTION_EXPENSE)){
+    	        List<String> expenseTypes = transactionDAO.getTransactionTypesByCategory(Constants.ACTION_EXPENSE);
     	        transactionTypes.addAll(expenseTypes);
     	  }
          transactionType.setItems(FXCollections.observableArrayList(transactionTypes));
     }
 
-    @FXML
+	@FXML
     void onClickBack(ActionEvent event) throws IOException {
     	Pane view = fxmlLoader.getPage("Home");
         homePane.setCenter(view);
@@ -93,6 +98,8 @@ public class TransactionController implements Initializable{
 
     @FXML
     public void addTransactionAction(ActionEvent event) throws IOException {  
+    	Double availableBalance = transactionDAO.getAvailableBalanceUser(activeID);
+    	Double transAmount =0.0;
     	if (transactionTitle.getText().isEmpty()){
         	new Alert(Alert.AlertType.ERROR, "Please enter transaction title").showAndWait();
         	return;
@@ -103,11 +110,12 @@ public class TransactionController implements Initializable{
         	return;
     	}
     	try {
-    		double amount = Double.parseDouble(transactionAmount.getText());
+    		transAmount = Double.parseDouble(transactionAmount.getText());
     	}catch(NumberFormatException e) {
-    		new Alert(Alert.AlertType.ERROR, "Please enter transaction amount").showAndWait();
+    		new Alert(Alert.AlertType.ERROR, "Please enter valid transaction amount").showAndWait();
         	return;
     	}
+
     	if(transactionType.getValue() == null){
         	new Alert(Alert.AlertType.ERROR, "Please select transaction type").showAndWait();
         	return;
@@ -129,11 +137,29 @@ public class TransactionController implements Initializable{
         
         transaction.setDate(sqlDate);
         transaction.setNotes(transactionReference.getText());
-        transaction.setUserId(LoginController.getInstance().activeID());
-        int status =  transactionDAO.saveTransaction(transaction);
+        transaction.setUserId(activeID);
+        int status=0;
+        ButtonType result = null;
+        
+        if (transAmount > availableBalance && action.equalsIgnoreCase(Constants.ACTION_EXPENSE)) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Transaction Info");
+            alert.setHeaderText("Transaction Amount Exceeds Available Funds");
+            alert.setContentText("Click OK to proceed, or Cancel to abort.");
+            
+            result = alert.showAndWait().orElse(ButtonType.CANCEL);
+         }
+        
+        if (action.equalsIgnoreCase(Constants.ACTION_INCOME) || 
+        		(action.equalsIgnoreCase(Constants.ACTION_EXPENSE) && result == ButtonType.OK)) {
+            status =  transactionDAO.saveTransaction(transaction);  
+        } else {
+            System.out.println("User clicked Cancel or closed the dialog, aborting...");
+            return;
+        }
         
         if(status == 0) {
-   		 new Alert(Alert.AlertType.ERROR, " !").showAndWait();
+   		 new Alert(Alert.AlertType.ERROR, "Transaction could not be added! Please try again later.").showAndWait();
    		 return;
         }            
        

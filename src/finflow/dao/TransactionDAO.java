@@ -17,4 +17,5 @@ public interface TransactionDAO {
 	String getTransactionTypeNameById(int typeId);
 	int updateTransactionAmount(int transactionId, double newAmount);
 	int deleteTransaction(int transactionId);
+	public Double getAvailableBalanceUser(int userId);
 }
