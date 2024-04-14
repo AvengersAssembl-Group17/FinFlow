@@ -9,20 +9,17 @@ public class Transaction {
     private double amount;
     private int type;
     private Date date;
-    private String notes;
     
     public Transaction() { 	
     }
     
-	public Transaction(int id, int userId, String title, double amount, int type, Date date,
-			String notes) {
+	public Transaction(int id, int userId, String title, double amount, int type, Date date) {
 		this.id = id;
 		this.userId = userId;
 		this.title = title;
 		this.amount = amount;
 		this.type = type;
 		this.date = date;
-		this.notes = notes;
 	}
 	public int getTransactionId() {
 		return id;
@@ -60,11 +57,4 @@ public class Transaction {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getNotes() {
-		return notes;
-	}
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-	
 }

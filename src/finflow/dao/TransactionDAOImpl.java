@@ -54,15 +54,14 @@ public class TransactionDAOImpl implements TransactionDAO{
     }
 	
 	public int saveTransaction(Transaction transact) {
-    	String query = "INSERT INTO Transaction(title, amount, type, date, notes, userId) VALUES (?,?,?,?,?,?)";
+    	String query = "INSERT INTO Transaction(title, amount, type, date, userId) VALUES (?,?,?,?,?)";
     	try (Connection connection = dbConnection.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             	 preparedStatement.setString(1, transact.getTitle());
                  preparedStatement.setDouble(2, transact.getAmount());
                  preparedStatement.setInt(3, transact.getType());
                  preparedStatement.setDate(4, (Date) transact.getDate());
-                 preparedStatement.setString(5, transact.getNotes());
-                 preparedStatement.setInt(6, transact.getUserId());
+                 preparedStatement.setInt(5, transact.getUserId());
                  int rowsAffected = preparedStatement.executeUpdate();
                  return rowsAffected > 0 ? 1: 0;
              }
@@ -170,7 +169,6 @@ public class TransactionDAOImpl implements TransactionDAO{
                 transaction.setTitle(resultSet.getString("title"));
                 transaction.setType(resultSet.getInt("type"));
                 transaction.setDate(resultSet.getDate("date"));
-                transaction.setNotes(resultSet.getString("notes"));
                 recentTransactions.add(transaction);
             }
         } catch (SQLException e) {

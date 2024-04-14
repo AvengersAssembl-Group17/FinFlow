@@ -47,9 +47,6 @@ public class TransactionItemController implements Initializable {
     private Label transactionDate;
 
     @FXML
-    private Label transactionNotes;
-
-    @FXML
     private Label transactionTitle;
     
     @FXML
@@ -91,7 +88,6 @@ public class TransactionItemController implements Initializable {
         }
     	transactionTitle.setText(trans.getTitle());
     	transactionDate.setText(trans.getDate().toString());
-    	transactionNotes.setText(trans.getNotes());
     	transactionAmount.setText(formattedAmount);
     }
 

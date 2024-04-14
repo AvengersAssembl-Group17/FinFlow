@@ -3,7 +3,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import java.io.IOException;
 import java.net.URL;
@@ -32,9 +31,6 @@ public class TransactionController implements Initializable{
     @FXML
     private DatePicker transactionDate;
     
-    @FXML
-    private TextField transactionReference;
-
     @FXML
     private Button addTransactionBtn;
     
@@ -149,7 +145,6 @@ public class TransactionController implements Initializable{
         transaction.setType(transactionDAO.getTransactionTypeId(transactionType.getValue()));
         
         transaction.setDate(sqlDate);
-        transaction.setNotes(transactionReference.getText());
         transaction.setUserId(activeID);
         int status = transactionDAO.saveTransaction(transaction);
 
