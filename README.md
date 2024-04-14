@@ -60,7 +60,9 @@ This guide will walk you through the steps required to set up a JavaFX project w
    - Select `JavaFX`.
    - Browse to the Scene Builder executable path and click `Apply and Close`.
 
-4. **Execute Database Scripts:**
+4. **Update your database configuration in `Config.java` file:**
+
+5. **Execute Database Scripts:**
    - Before running the project, execute `release_db.sql` to set up your database schema.
 
 ## Running the Project
