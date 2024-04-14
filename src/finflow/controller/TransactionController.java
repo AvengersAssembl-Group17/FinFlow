@@ -125,6 +125,19 @@ public class TransactionController implements Initializable{
         	new Alert(Alert.AlertType.ERROR, "Please enter transaction date").showAndWait();
         	return;
         }
+
+        if (transAmount > availableBalance && action.equalsIgnoreCase(Constants.ACTION_EXPENSE)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Transaction Amount Exceeds Available Funds");
+            alert.setContentText("Click OK to proceed, or Cancel to abort.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (!result.isPresent() || result.get() != ButtonType.OK) {
+                System.out.println("User clicked Cancel or closed the dialog, aborting add transaction");
+                return;
+            }
+        }
         
         LocalDate localTransactionDate = transactionDate.getValue();
     	java.sql.Date sqlDate = Date.valueOf(localTransactionDate);
@@ -138,26 +151,8 @@ public class TransactionController implements Initializable{
         transaction.setDate(sqlDate);
         transaction.setNotes(transactionReference.getText());
         transaction.setUserId(activeID);
-        int status=0;
-        Optional<ButtonType> result = null;
-        
-        if (transAmount > availableBalance && action.equalsIgnoreCase(Constants.ACTION_EXPENSE)) {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Transaction Amount Exceeds Available Funds");
-            alert.setContentText("Click OK to proceed, or Cancel to abort.");
-            
-            result = alert.showAndWait();
-         }
-        
-        if (action.equalsIgnoreCase(Constants.ACTION_INCOME) || 
-        		(action.equalsIgnoreCase(Constants.ACTION_EXPENSE) && result.isPresent() && result.get() == ButtonType.OK)) {
-            status =  transactionDAO.saveTransaction(transaction);  
-        } else {
-            System.out.println("User clicked Cancel or closed the dialog, aborting add transaction");
-            return;
-        }
-        
+        int status = transactionDAO.saveTransaction(transaction);
+
         if(status == 0) {
    		 new Alert(Alert.AlertType.ERROR, "Transaction could not be added! Please try again later.").showAndWait();
    		 return;

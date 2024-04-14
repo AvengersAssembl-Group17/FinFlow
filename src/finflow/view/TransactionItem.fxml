@@ -18,7 +18,7 @@
       <Pane prefHeight="58.0" prefWidth="20.0" />
       <Label fx:id="transactionTitle" prefHeight="55.0" prefWidth="169.0" text="Transaction Title" />
       <Label fx:id="transactionDate" prefHeight="55.0" prefWidth="166.0" text="Date" textAlignment="RIGHT" />
-      <Label fx:id="transactionNotes" prefHeight="55.0" prefWidth="18.0" text="notes" textAlignment="RIGHT" />
+      <Label fx:id="transactionNotes" prefHeight="55.0" prefWidth="37.0" text="notes" />
       <Label fx:id="transactionAmount" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="55.0" prefWidth="120.0" text="\$0.00">
          <HBox.margin>
             <Insets />
