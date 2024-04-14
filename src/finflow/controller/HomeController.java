@@ -69,6 +69,10 @@ public class HomeController implements Initializable{
     private Double totalIncome =0.0;
     private Double totalExpense =0.0;
     private Double totalBalance =0.0;
+    
+    public VBox getTransactionLayout() {
+        return transactionLayout;
+    }
 
     public HomeController() {
         instance = this; 
@@ -136,6 +140,12 @@ public class HomeController implements Initializable{
     	this.txtTotalBalance.setText(formattedTotalBalance);
     }
     
+    public List<Transaction> getRecenTransaction(){
+    	List<Transaction> recentTrans= new ArrayList<>();
+    	recentTrans = transDAO.getRecentTransactions(activeUser,Constants.RECENT_TRANSACTION_LIMIT);
+    	return recentTrans;
+    }
+    
     public void populateRecentTransaction() {
     	List<Transaction> recentTrans= new ArrayList<>(getRecenTransaction());
     	
@@ -158,10 +168,9 @@ public class HomeController implements Initializable{
     	} 
     }
     
-    public List<Transaction> getRecenTransaction(){
-    	List<Transaction> recentTrans= new ArrayList<>();
-    	recentTrans = transDAO.getRecentTransactions(activeUser,Constants.RECENT_TRANSACTION_LIMIT);
-    	return recentTrans;
+ // New method to clear the transaction layout
+    public void clearTransactionLayout() {
+        transactionLayout.getChildren().clear();
     }
     
     @FXML
@@ -178,7 +187,19 @@ public class HomeController implements Initializable{
         homePane.setCenter(view);
     }
     
-    private void showNoTransactionsLabel(boolean show) {
+    @FXML
+    void updateTransaction(ActionEvent event) throws IOException {
+        // Set the action to indicate that it's an update operation
+        this.action = "Update Transaction";
+        
+        // Load the FXML file for the update window
+        Pane view = fxmlLoader.getPage("UpdateTransaction");
+        
+        // Set the center pane of the home screen to the update window
+        homePane.setCenter(view);
+    }
+    
+        private void showNoTransactionsLabel(boolean show) {
         if (show && !transactionLayout.getChildren().contains(noTransactionsLabel)) {
         	transactionLayout.getChildren().add(noTransactionsLabel);
         	noTransactionsLabel.setVisible(true);

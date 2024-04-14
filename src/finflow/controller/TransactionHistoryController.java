@@ -24,13 +24,16 @@ public class TransactionHistoryController implements Initializable {
 	private TransactionDAO transDAO;
 	
 	private int activeUser;
+	
+	private TransactionItemController itemController; 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	this.transDAO = new TransactionDAOImpl(new DatabaseConnection());
     	this.activeUser = LoginController.getInstance().activeID();
 		populateTransaction();
-	}
+	}	
+	
 	
 	public void populateTransaction() {
     	List<Transaction> recentTrans= new ArrayList<>(Transaction());
@@ -42,6 +45,7 @@ public class TransactionHistoryController implements Initializable {
         		HBox hbox = fxmlLoader.load();
         		TransactionItemController tic = fxmlLoader.getController();
         		tic.setData(recentTrans.get(i));
+        		tic.setHistoryController(this);
         		transactionHistoryLayout.getChildren().add(hbox);
     		}catch(IOException e) {
     			e.printStackTrace();
@@ -53,5 +57,10 @@ public class TransactionHistoryController implements Initializable {
     	List<Transaction> recentTrans= new ArrayList<>();
     	recentTrans = transDAO.getRecentTransactions(activeUser,0);
     	return recentTrans;
+    }
+    
+ // New method to clear the transaction history layout
+    public void clearTransactionHistoryLayout() {
+        transactionHistoryLayout.getChildren().clear();
     }
 }
