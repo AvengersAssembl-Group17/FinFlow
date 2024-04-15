@@ -90,6 +90,11 @@ public class ProfileController implements Initializable {
             return;
         }
         
+        if(userDAO.userExists(txtuserName.getText())) {
+        	showAlert("Error", "Username already in use");
+            return;
+        }
+        
         // Validate phone number
         if (!isValidPhone(phone)) {
             showAlert("Error", "Phone number should only contain numeric characters.");
@@ -121,6 +126,7 @@ public class ProfileController implements Initializable {
         } else {
             showAlert("Error", "Failed to update profile.");
         }
+        LoginController.getInstance().setUsername(userName);
     }
 
     private boolean isValidfName(String firstName) {

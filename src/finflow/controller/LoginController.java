@@ -59,6 +59,9 @@ public class LoginController implements Initializable{
         return txtUsername.getText();
     }
 
+    public void setUsername(String username) {
+        this.txtUsername.setText(username);
+    }
  
     /**
      * @param url location, resources
