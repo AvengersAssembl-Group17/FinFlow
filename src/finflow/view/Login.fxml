@@ -26,7 +26,7 @@
          <font>
             <Font name="Lato Bold" size="18.0" />
          </font></Button>
-      <Text fill="#090909" layoutX="526.0" layoutY="169.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back ! Please enter your credentials to continue" wrappingWidth="243.33333333333326">
+      <Text fill="#090909" layoutX="542.0" layoutY="169.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please enter your credentials to continue" wrappingWidth="243.33333333333326">
          <font>
             <Font size="9.0" />
          </font>
