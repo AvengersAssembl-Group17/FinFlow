@@ -87,7 +87,7 @@ public class SignUpController implements Initializable{
             } else if (!txtPhone.getText().matches("\\d+") || txtPhone.getText().length() != 10){
             	new Alert(Alert.AlertType.ERROR, "Please enter valid contact number").showAndWait();
             } else if(userDAO.userExists(txtuserName.getText())) {
-            	new Alert(Alert.AlertType.ERROR, "User already exists").showAndWait();
+            	new Alert(Alert.AlertType.ERROR, "Username already in use").showAndWait();
             } else {
             	user.setUsername(txtuserName.getText());
             	user.setLastName(txtlastName.getText());
