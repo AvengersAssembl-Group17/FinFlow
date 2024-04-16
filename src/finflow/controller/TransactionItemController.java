@@ -127,16 +127,18 @@ public class TransactionItemController implements Initializable {
         });
 
         amountField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!isValidNumber(newValue)) {
-                // Show dialog for invalid input
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid number for the amount.");
-                alert.showAndWait();
+            if (!newValue.isEmpty()) {
+                if (!isValidNumber(newValue)) {
+                    // Show dialog for invalid input
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please enter a valid number for the amount.");
+                    alert.showAndWait();
 
-                // Clear the invalid input
-                amountField.setText(oldValue);
+                    // Clear the invalid input
+                    amountField.setText(oldValue);
+                }
             }
             updateButton.setDisable(newValue.trim().isEmpty() || titleField.getText().trim().isEmpty() || datePicker.getValue() == null);
         });
