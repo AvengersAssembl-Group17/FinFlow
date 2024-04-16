@@ -2,14 +2,18 @@ package finflow.controller;
 
 import java.io.InputStream;
 import java.net.URL;
+//import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.util.Duration;
 import finflow.dao.DatabaseConnection;
 import finflow.dao.TransactionDAO;
 import finflow.dao.TransactionDAOImpl;
 import finflow.model.Transaction;
 import finflow.model.TransactionDetails;
 import finflow.utils.Constants;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -185,7 +189,7 @@ public class TransactionItemController implements Initializable {
     private boolean isValidNumber(String input) {
         try {
             double amount = Double.parseDouble(input);
-            return amount >= 0; // You can add additional validation if needed
+            return amount >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
