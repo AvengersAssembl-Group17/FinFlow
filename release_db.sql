@@ -29,13 +29,12 @@ CREATE TABLE finflow.transaction (
    FOREIGN KEY (`type`) REFERENCES `transactionType` (`id`)
 );
 
---income
+
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Salary', 'Income');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Investment', 'Income');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Gifts', 'Income');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Rent', 'Income');
 
---expense
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Education', 'Expense');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Grocery', 'Expense');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Rent', 'Expense');
