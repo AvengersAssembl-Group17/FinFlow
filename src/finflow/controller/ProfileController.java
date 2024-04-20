@@ -19,26 +19,28 @@ import java.util.ResourceBundle;
 public class ProfileController implements Initializable {
 
 
-	    @FXML
-	    private Button btnCreateAccount;
+	@FXML
+    private Button btnCreateAccount;
 
-	    @FXML
-	    private PasswordField txtConfirmPassword;
+    @FXML
+    private PasswordField txtConfirmPassword;
 
-	    @FXML
-	    private PasswordField txtPassword;
+    @FXML
+    private PasswordField txtPassword;
 
-	    @FXML
-	    private TextField txtPhone;
+    @FXML
+    private TextField txtPhone;
 
-	    @FXML
-	    private TextField txtfirstName;
+    @FXML
+    private TextField txtfirstName;
 
-	    @FXML
-	    private TextField txtlastName;
+    @FXML
+    private TextField txtlastName;
 
-	    @FXML
-	    private TextField txtuserName;
+    @FXML
+    private TextField txtuserName;
+    
+    private String existingUserName;
 
 
     private UserDAO userDAO;
@@ -58,6 +60,7 @@ public class ProfileController implements Initializable {
                 txtlastName.setText(currentUser.getString("lname"));
                 txtPhone.setText(currentUser.getString("phone"));
                 txtuserName.setText(currentUser.getString("username"));
+                existingUserName = currentUser.getString("username");    
             }
           currentUser.close(); // Close ResultSet
         } catch (SQLException e) {
@@ -90,7 +93,7 @@ public class ProfileController implements Initializable {
             return;
         }
         
-        if(userDAO.userExists(txtuserName.getText())) {
+        if(!existingUserName.equalsIgnoreCase(txtuserName.getText()) && userDAO.userExists(txtuserName.getText())) {
         	showAlert("Error", "Username already in use");
             return;
         }
