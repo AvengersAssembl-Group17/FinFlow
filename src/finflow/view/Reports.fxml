@@ -20,11 +20,11 @@
                   </Text>
                   <ScrollPane layoutX="18.0" layoutY="93.0" prefHeight="508.0" prefWidth="515.0">
                      <content>
-                        <AnchorPane prefHeight="1131.0" prefWidth="595.0">
+                        <AnchorPane prefHeight="1131.0" prefWidth="793.0">
                            <children>
                               <PieChart fx:id="pieChartTotal" layoutX="137.0" layoutY="59.0" prefHeight="229.0" prefWidth="252.0" />
-                              <PieChart fx:id="pieChartIncome" layoutX="9.0" layoutY="291.0" prefHeight="270.0" prefWidth="254.0" />
-                              <PieChart fx:id="pieChartExpense" layoutX="264.0" layoutY="297.0" prefHeight="333.0" prefWidth="331.0" />
+                              <PieChart fx:id="pieChartIncome" layoutX="7.0" layoutY="297.0" prefHeight="332.0" prefWidth="331.0" />
+                              <PieChart fx:id="pieChartExpense" layoutX="361.0" layoutY="301.0" prefHeight="332.0" prefWidth="331.0" />
                            </children>
                         </AnchorPane>
                      </content>
