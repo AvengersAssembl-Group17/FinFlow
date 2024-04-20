@@ -33,7 +33,7 @@ CREATE TABLE finflow.transaction (
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Salary', 'Income');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Investment', 'Income');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Gifts', 'Income');
-INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Rent Income', 'Income');
+INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Rental Income', 'Income');
 
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Education', 'Expense');
 INSERT INTO finflow.transactionType (`type`, `category`) VALUES ('Grocery', 'Expense');
