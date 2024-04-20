@@ -1,4 +1,4 @@
-# FinFlow
+# FinFlow [Finflow project proposal ](https://finflow-proposal.my.canva.site/finflow)
 A JavaFX GUI app to track all incoming and outgoing transactions efficiently. Its simple design makes it lightweight and straightforward.
 
 
@@ -21,6 +21,10 @@ A JavaFX GUI app to track all incoming and outgoing transactions efficiently. It
 - As a user, I should be able to update profile details.
 - As a user, I should be able to access educational resource.
 
+
+---
+# UML Diagram
+![UML](https://github.com/AvengersAssembl-Group17/FinFlow/assets/98074476/85d08306-3996-4601-ab08-f5e9419587b9)
 
 
 ---
